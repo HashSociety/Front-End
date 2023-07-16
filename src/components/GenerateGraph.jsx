@@ -3,18 +3,30 @@ import { useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsNetworkgraph from 'highcharts/modules/networkgraph';
 import HighchartsExporting from 'highcharts/modules/exporting';
+import {useQuery , useQueryClient} from '@tanstack/react-query'
 
 
 // Initialize Highcharts modules
 
-export default function GenerateGraph({ data }) {
+export default function GenerateGraph({ pcap }) {
+    const queryClient = useQueryClient()
     HighchartsNetworkgraph(Highcharts);
     HighchartsExporting(Highcharts);
 
+    
+    const url = 'have to put backend url here'
+    const request = async () => {
+        const response = await fetch(url)
+    
+        return response.json()
+    }
+
+    const {data , isLoading , isError} = useQuery(['getpcap'] , request )
+    console.log(data)
 
     const nodes = [];
 
-    data.forEach(arr => {
+    pcap.forEach(arr => {
         nodes.push([arr[0], arr[1]])
         nodes.push([arr[1], arr[2]])
     })
