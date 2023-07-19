@@ -13,8 +13,7 @@ export default function GenerateGraph({ pcap }) {
     HighchartsNetworkgraph(Highcharts);
     HighchartsExporting(Highcharts);
 
-    
-    const url = 'have to put backend url here'
+    const url = import.meta.env.VITE_BACKEND_URL
     const request = async () => {
         const response = await fetch(url)
     

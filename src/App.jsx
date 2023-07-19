@@ -1,15 +1,10 @@
 import React, { useEffect } from 'react';
 import "./App.css"
 import GenerateGraph from './components/GenerateGraph';
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
 
-const queryClient = new QueryClient()
+import { Route, Routes } from "react-router-dom"
+
+
 
 const App = () => {
 
@@ -40,12 +35,15 @@ const App = () => {
   return (
 
     
-    <QueryClientProvider client={queryClient}>
+
+       <Routes>
+       <Route path="/" element={
       <div className=' h-screen w-screen flex justify-center items-center flex-col gap-10'>
         <div className='font-bold text-3xl' >Mesh Hawk</div>
         <GenerateGraph pcap={pcap} />
-      </div>
-    </QueryClientProvider>
+      </div>} />
+       </Routes>
+
 
   );
 };
