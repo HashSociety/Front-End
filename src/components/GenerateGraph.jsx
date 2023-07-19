@@ -16,7 +16,6 @@ export default function GenerateGraph({ pcap }) {
     const url = import.meta.env.VITE_BACKEND_URL
     const request = async () => {
         const response = await fetch(url)
-    
         return response.json()
     }
 
