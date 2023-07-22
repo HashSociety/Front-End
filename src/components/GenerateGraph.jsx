@@ -137,9 +137,10 @@ export default function GenerateGraph({ pcap }) {
       },
       plotOptions: {
         networkgraph: {
-          layoutAlgorithm: {
-            linkLength: 50,
-          },
+            layoutAlgorithm: {
+                enableSimulation: true,
+                integration: 'verlet', // Use 'verlet' to have a fixed distance between nodes
+              },
           marker: {
             fillColor: '#FFFFFF',
             lineWidth: 8,
