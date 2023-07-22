@@ -1,50 +1,61 @@
-import React, { useEffect } from 'react';
-import "./App.css"
-import GenerateGraph from './components/GenerateGraph';
-
-import { Route, Routes } from "react-router-dom"
-
-
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import axios from "axios";
+import GenerateGraph from "./components/GenerateGraph";
 
 const App = () => {
+  const [file, setFile] = useState(null);
+  const [responseMessage, setResponseMessage] = useState(null);
 
-  const pcap = [
-    ['4c:34:88:90:77:48', '12:89:01:e1:70:8b', '02:66:bf:8b:1a:bb'],
-    ['12:89:01:e1:70:8b', '12:89:01:e1:70:8b', '4c:34:88:90:77:48'],
-    ['12:89:01:e1:70:8b', '02:66:bf:8b:1a:bb', '12:89:01:e1:70:8b'],
-    ['12:89:01:e1:70:8b', '02:66:bf:8b:1a:bb', '12:89:01:e1:70:8b'],
-    ['12:89:01:e1:70:8b', '02:66:bf:8b:1a:bb', '12:89:01:e1:70:8b'],
-    ['12:89:01:e1:70:8b', '12:89:01:e1:70:8b', '4c:34:88:90:77:48'],
-    ['33:33:00:00:00:16', '4c:34:88:90:77:48', '12:89:01:e1:70:8b'],
-    ['01:00:5e:00:00:16', '4c:34:88:90:77:48', '12:89:01:e1:70:8b'],
-    ['4c:34:88:90:77:48', '12:89:01:e1:70:8b', '33:33:ff:d8:8f:75'],
-    ['12:89:01:e1:70:8b', '12:89:01:e1:70:8b', '4c:34:88:90:77:48'],
-    ['12:89:01:e1:70:8b', '12:89:01:e1:70:8b', '4c:34:88:90:77:48'],
-    ['12:89:01:e1:70:8b', '02:66:bf:8b:1a:bb', '12:89:01:e1:70:8b'],
-    ['12:89:01:e1:70:8b', '4c:34:88:90:77:48', '12:89:01:e1:70:8b'],
-    ['12:89:01:e1:70:8b', '12:89:01:e1:70:8b', '4c:34:88:90:77:48'],
-    ['12:89:01:e1:70:8b', '12:89:01:e1:70:8b', '4c:34:88:90:77:48'],
-    ['4c:34:88:90:77:48', '02:66:bf:8b:1a:bb', '12:89:01:e1:70:8b'],
-    ['02:66:bf:8b:1a:bb', '12:89:01:e1:70:8b', '4c:34:88:90:77:48'],
-    ['12:89:01:e1:70:8b', '4c:34:88:90:77:48', '12:89:01:e1:70:8b'],
-    ['12:89:01:e1:70:8b', '4c:34:88:90:77:48', '12:89:01:e1:70:8b'],
-  ]
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+  };
 
+  const handleFileUpload = async () => {
+    if (!file) return; // No file selected
 
+    const formData = new FormData();
+    formData.append("pcapng_file", file);
+
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (response.status === 200) {
+        // Assuming the server responds with the addresses data in the "pcap" format
+        setResponseMessage(response.data.addresses);
+      } else {
+        console.error("Failed to upload the file.");
+        // Handle error response from the backend if needed
+      }
+    } catch (error) {
+      console.error("Error occurred during file upload:", error);
+    }
+  };
 
   return (
-
-    
-
-       <Routes>
-       <Route path="/" element={
-      <div className=' h-screen w-screen flex justify-center items-center flex-col gap-10'>
-        <div className='font-bold text-3xl' >Mesh Hawk</div>
-        <GenerateGraph pcap={pcap} />
-      </div>} />
-       </Routes>
-
-
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="h-screen w-screen flex justify-center items-center flex-col gap-10">
+            <div className="font-bold text-3xl">Mesh Hawk</div>
+            {responseMessage ? (
+              <GenerateGraph pcap={responseMessage} />
+            ) : (
+              <div>
+                <input type="file" onChange={handleFileChange} />
+                <button onClick={handleFileUpload}>Upload</button>
+              </div>
+            )}
+          </div>
+        }
+      />
+    </Routes>
   );
 };
 
