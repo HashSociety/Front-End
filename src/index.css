@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* .highcharts-button-symbol, .highcharts-credits, .highcharts-exporting-group{
+    display: none;
+  } */
+
+/* 
+  .highcharts-root{
+    width: 400px;
+  }  */
+
+  .highcharts-credits{
+    display: none;
+  }

@@ -9,35 +9,29 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 HighchartsNetworkgraph(Highcharts);
 HighchartsExporting(Highcharts);
 
-export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth}) {
+export default function GenerateGraph({ pcap , keyVar }) {
   const queryClient = useQueryClient();
 
-  const url = import.meta.env.VITE_BACKEND_URL;
-  const request = async () => {
-    const response = await fetch(url);
-    return response.json();
-  };
+  // const url = import.meta.env.VITE_BACKEND_URL;
+  // const request = async () => {
+  //   const response = await fetch(url);
+  //   return response.json();
+  // };
+  console.log(keyVar)
+  // const { data, isLoading, isError } = useQuery(['getpcap'], request);
+  // console.log(data);
 
-  const { data, isLoading, isError, height, width } = useQuery(['getpcap'], request);
-  console.log(data);
-
-  const nodes = []; 
-
+  const nodes = [];
 
   // Update the logic for creating nodes from the pcap array of size 4
-  // pcap.forEach((arr) => {
-  //   nodes.push([arr[0], arr[3]]);
-  //   // nodes.push([arr[2], arr[3]]);
-  // });
-  
-  pcap.forEach((el, index) => el.forEach((res, i) => (i < el.length - 1 ) &&  nodes.push([res, el[i+1]])))
-  // console.log(nodes)
-
-  
-
-  
+  pcap.forEach((arr) => {
+    nodes.push([arr[0], arr[1]]);
+    // nodes.push([arr[2], arr[3]]);
+  });
 
   useEffect(() => {
+
+    
     (function (H) {
       H.wrap(
         H.seriesTypes.networkgraph.prototype.pointClass.prototype,
@@ -49,7 +43,7 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth}) {
           var angle = Math.atan(
             (left.plotX - right.plotX) / (left.plotY - right.plotY)
           );
-
+``
           if (angle) {
             let path = [
                 'M',
@@ -146,18 +140,17 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth}) {
       plotOptions: {
         networkgraph: {
             layoutAlgorithm: {
-                enableSimulation: false,
-                integration: 'verlet', // Use 'verlet' to have a fixed distance between nodes
+              linkLength: 70,
               },
           marker: {
             fillColor: '#FFFFFF',
-            lineWidth: 8,
+            lineWidth: 5,
             lineColor: 'blue',
-            radius: 15,
+            radius: 12,
           },
           link: {
             color: 'blue',
-            dashStyle: 'solid ',
+            dashStyle: 'solid',
             linkDirection: 'both',
           },
         },
@@ -170,8 +163,9 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth}) {
             linkFormat: '',
             style: {
               color: 'black',
-              fontSize: '16px',
+              fontSize: '13px',
               fontWeight: 'bold',
+              
             },
             y: -20,
           },
@@ -181,17 +175,13 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth}) {
       ],
     };
 
-    Highcharts.chart(`key ${keyVar}`, chartOptions);
+    Highcharts.chart(`com${keyVar}`, chartOptions);
   }, []);
 
   return (
     <div
-      id={`key ${keyVar}`}
-      style={{
-        height: graphHeight,
-        width: graphWidth
-      }}
-      className="flex justify-center items-center bg-gray-100 rounded-2xl p-10 mb-1"
+      id={`com${keyVar}`}
+      className="flex justify-center items-center bg-gray-100 rounded-2xl  h-[50%] "
     ></div>
   );
 }

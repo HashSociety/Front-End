@@ -10,4 +10,7 @@
   display: none;
 }
 
+.highcharts-root{
+  width: 400px;
+}
 
