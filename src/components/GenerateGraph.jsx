@@ -10,9 +10,9 @@ import { getPcap } from '../api';
 HighchartsNetworkgraph(Highcharts);
 HighchartsExporting(Highcharts);
 
-export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,clasNameVar}) {
+export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,className}) {
   const queryClient = useQueryClient();
-console.log(clasNameVar )
+// console.log(classNameVar )
   const url = import.meta.env.VITE_BACKEND_URL;
 
   const { data, isLoading, isError, height, width } = useQuery(['getpcap'], getPcap);
@@ -190,7 +190,7 @@ console.log(clasNameVar )
         // backgroundColor: 'white',
         // borderRadius:"1rem"
       }}
-      className={`${clasNameVar}`}
+      className={`${className}`}
     ></div>
   );
 }
