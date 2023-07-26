@@ -4,6 +4,7 @@ import Highcharts from 'highcharts';
 import HighchartsNetworkgraph from 'highcharts/modules/networkgraph';
 import HighchartsExporting from 'highcharts/modules/exporting';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { getPcap } from '../api';
 
 // Initialize Highcharts modules
 HighchartsNetworkgraph(Highcharts);
@@ -13,12 +14,8 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,cla
   const queryClient = useQueryClient();
 console.log(clasNameVar )
   const url = import.meta.env.VITE_BACKEND_URL;
-  const request = async () => {
-    const response = await fetch(url);
-    return response.json();
-  };
 
-  const { data, isLoading, isError, height, width } = useQuery(['getpcap'], request);
+  const { data, isLoading, isError, height, width } = useQuery(['getpcap'], getPcap);
   console.log(data);
 
   const nodes = []; 
