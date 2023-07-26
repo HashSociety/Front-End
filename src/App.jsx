@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
+import "./App.css"
 import GenerateGraph from "./components/GenerateGraph";
-import Gen from "./components/GenGraph2";
+import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+
 const App = () => {
   const [file, setFile] = useState(null);
   const [responseMessage, setResponseMessage] = useState(null);
@@ -55,24 +58,30 @@ const App = () => {
     return <GenerateGraph pcap={data} />
   }
   return (
-    <Routes>
+<div className="main-container">
+  <Navbar />
+<Routes>
+      
+      <Route path="/" element={<Home/>}/>
+
+      
       <Route
-        path="/"
+        path="/map"
         element={ 
-          <div className="h-screen w-screen flex flex-col bg-[#0F121B] overflow-auto">
-            <div className="font-bold text-3xl text-[white] text-center">Mesh Hawk</div>
+          <div className="">
+            
             {responseMessage ? (
-              <div className="flex gap-10 px-20 pt-10">
+              <div className="flex flex-col justify-center items-center pt-10 gap-10">
                 
                 <div >
-                  <GenerateGraph pcap={responseMessage} graphHeight={600} graphWidth={900} />
+                  <GenerateGraph keyVar={`maingraph`} pcap={responseMessage} graphHeight={600} graphWidth={1000} clasNameVar={"flex justify-center items-center bg-gray-100 rounded-2xl p-10 mb-1"} />
                 </div>
 
                 
-                <div className="">
+                <div className="flex flex-row gap-10 justify-center items-center">
                   {secresponseMessage.map((result, index) => (
                     <div key={index} className="">
-                      <GenerateGraph keyVar={index} pcap={result} graphHeight={300} graphWidth={400} />  
+                      <GenerateGraph keyVar={`component${index}`} pcap={result} graphHeight={300} graphWidth={500} classNameVar={"flex justify-center items-center bg-gray-100 rounded-2xl p-10 mb-1"} />  
                     </div>
                   ))}
                 </div>
@@ -87,6 +96,7 @@ const App = () => {
         }
       />
     </Routes>
+</div>
   );
 };
 

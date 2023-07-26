@@ -9,9 +9,9 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 HighchartsNetworkgraph(Highcharts);
 HighchartsExporting(Highcharts);
 
-export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth}) {
+export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,clasNameVar}) {
   const queryClient = useQueryClient();
-
+console.log(clasNameVar )
   const url = import.meta.env.VITE_BACKEND_URL;
   const request = async () => {
     const response = await fetch(url);
@@ -22,7 +22,7 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth}) {
   console.log(data);
 
   const nodes = []; 
-
+  
 
   // Update the logic for creating nodes from the pcap array of size 4
   // pcap.forEach((arr) => {
@@ -138,7 +138,7 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth}) {
     const chartOptions = {
       chart: {
         type: 'networkgraph',
-        backgroundColor: 'transparent',
+        // backgroundColor: 'transparent',
       },
       title: {
         text: '',
@@ -189,9 +189,11 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth}) {
       id={`key ${keyVar}`}
       style={{
         height: graphHeight,
-        width: graphWidth
+        width: graphWidth,
+        // backgroundColor: 'white',
+        // borderRadius:"1rem"
       }}
-      className="flex justify-center items-center bg-gray-100 rounded-2xl p-10 mb-1"
+      className={`${clasNameVar}`}
     ></div>
   );
 }

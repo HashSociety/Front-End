@@ -6,6 +6,13 @@ export default {
   ],
   theme: {
     extend: {},
+    colors:{
+      "background": "#0F121B",
+      "primary": "#437EFF",
+      "content-bg": "#010613"
+      
+
+    }
   },
   plugins: [],
 }
