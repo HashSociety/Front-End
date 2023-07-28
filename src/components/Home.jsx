@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/hero.png";
-
+import Navbar from "./Navbar"
 import { useNavigate } from "react-router-dom";
 
 function Home({ currentStep, setCurrentStep }) {
@@ -12,6 +12,7 @@ function Home({ currentStep, setCurrentStep }) {
   };
   return (
     <>
+    <Navbar />
       <div className="flex flex-row justify-between width-100">
         <div className="font-semibold text-7xl flex min-h-[38rem] flex-col justify-center  items-start pl-8">
           Mesh Detection

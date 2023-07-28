@@ -23,6 +23,7 @@ export const  getPcap = async () => {
       });
   
       if (response.status === 200) {
+        console.log(response.data)
         return response.data;
       } else {
         throw new Error("Failed to upload the file.");
