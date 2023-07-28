@@ -19,8 +19,8 @@ function Navbar() {
       </div>
       
       <div className="flex gap-2 font-semibold text-base">
-          <button className="btn">Login</button>
-          <button className="btn bg-primary border-0">Sign up</button>
+          <Link href="/login" className="btn">Login</Link>
+
       </div>
       
     </nav>

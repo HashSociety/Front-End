@@ -24,7 +24,7 @@ const App = () => {
       {shouldHideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
-
+        
         <Route path="/map" element={<Map />} />
         <Route path="/protocol" element={<Protocol />} />
         <Route path="/scan" element={<Scanning />} />
