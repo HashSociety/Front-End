@@ -37,23 +37,36 @@ const App = () => {
 
   return (
     <div className="max-w-[80%] h-screen block mx-auto">
-      {shouldHideNavbar && <Navbar user={userId}/>}
+      {shouldHideNavbar && <Navbar user={userId} />}
       <Routes>
         <Route path="/" element={<Home user={userId} />} />
-        
-            <Route
-              path="/map"
-              element={
-                <Protected user={userId}>
-                  <Map />
-                </Protected>
-              }
-            />
-            <Route path="/protocol" element={ <Protected user={userId}><Protocol /></Protected>} />
-            <Route path="/scan" element={<Protected user={userId}><Scanning /></Protected>} />
-          
-          <Route path="/login" element={<Login />} />
-     
+
+        <Route
+          path="/map"
+          element={
+            <Protected user={userId}>
+              <Map />
+            </Protected>
+          }
+        />
+        <Route
+          path="/protocol"
+          element={
+            // <Protected user={userId}>
+              <Protocol />
+            // </Protected>
+          }
+        />
+        <Route
+          path="/scan"
+          element={
+            // <Protected user={userId}>
+              <Scanning />
+            // </Protected>
+          }
+        />
+
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );
