@@ -10,7 +10,7 @@ export const  getPcap = async () => {
 
 
   export const FileUpload = async (file) => {
-    if (!file) return; // No file selected
+    if (!file) return; 
   
     const formData = new FormData();
     formData.append("pcapng_file", file);
@@ -57,3 +57,14 @@ export const  getPcap = async () => {
       throw new Error("Error occurred during login request.");
     }
   };
+
+  export const getUser = async(token) => {
+    const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/get_userid", {
+      methods: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return res.json();
+  }

@@ -5,13 +5,20 @@ import { getLoginToken } from "../api";
 function Login() {
   const loginMutation = useMutation(getLoginToken);
 
+  const setTokenToStorage = (token) => {
+    localStorage.setItem("token", token);
+  }
+
+
+
   const loginSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
     loginMutation.mutate(formData, {
       onSuccess: (data) => {
-        console.log("Mutation success:", data);
+        setTokenToStorage(data.access_token);
+        window.location.href = "/";
       },
     });
   };
@@ -39,8 +46,8 @@ function Login() {
             Password
           </label>
           <input
-            name="password" // Added the 'name' attribute to the input
-            defaultValue="sanskar@123" // Use defaultValue instead of value
+            name="password" 
+            defaultValue="sanskar@123"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"

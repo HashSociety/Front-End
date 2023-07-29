@@ -1,14 +1,14 @@
 import React from "react";
 import logo from "../assets/hero.png";
 
-import { useNavigate } from "react-router-dom";
 
-function Home({ currentStep, setCurrentStep }) {
+import { useNavigate, Link } from "react-router-dom";
+
+function Home({ currentStep, setCurrentStep, user }) {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/map");
     setCurrentStep(currentStep + 1);
-    
   };
   return (
     <>
@@ -17,26 +17,22 @@ function Home({ currentStep, setCurrentStep }) {
           Mesh Detection
           <span className="text-primary "> made easy!!</span>
           <div className="flex flex-row gap-4">
-            <button
-              href="/map"
-              className="text-xl font-semibold my-5 ml-1 px-3 rounded-3xl bg-primary group/demo cursor-pointer "
-              onClick={handleClick}
-            >
-              Automated Scan{" "}
-              <span className="pl-2 text-2xl group-hover/demo:pl-5 transition-all duration-300 ease-in-out text-[white]">
-                &rarr;{" "}
-              </span>
-            </button>
-            <button
-              href="/map"
-              className="text-xl font-extralight py-5 pl-1 group/demo cursor-pointer"
-              onClick={handleClick}
-            >
-              Manual Scan{" "}
-              <span className="pl-2 text-2xl group-hover/demo:pl-5 transition-all duration-300 ease-in-out text-primary">
-                &rarr;{" "}
-              </span>
-            </button>
+            {user ? (
+              <button
+                href="/map"
+                className="text-xl font-semibold my-5 ml-1 px-3 rounded-3xl bg-yellow-200 text-black group/demo cursor-pointer "
+                onClick={handleClick}
+              >
+                Automated Scan{" "}
+                <span className="pl-2 text-2xl group-hover/demo:pl-5 transition-all duration-300 ease-in-out ">
+                  &rarr;{" "}
+                </span>
+              </button>
+            ) : (
+              <Link to="/login" className="text-xl font-semibold my-5 ml-1 px-3 rounded-3xl bg-primary group/demo cursor-pointer ">
+                Login &rarr;{" "}
+              </Link>
+            )}
           </div>
         </div>
         <div className="flex justify-end pr-8  items-center">
@@ -72,7 +68,7 @@ function Home({ currentStep, setCurrentStep }) {
               The service can be leveraged to detect security threats and ensure
               safety.
             </p>
-          </div>  
+          </div>
 
           <div className=" w-[100%] relative bg-content-bg rounded-2xl p-10 overflow-hidden ">
             <div className="absolute bottom-[-20px] right-[-20px] font-extrabold text-9xl text-[white] opacity-10 ">
@@ -84,7 +80,6 @@ function Home({ currentStep, setCurrentStep }) {
           </div>
         </div>
       </div>
-      {/* <div className="absolute z-[-1] h-[150%] translate-x-[-142px] translate-y-[-580px] opacity-40 aspect-square  rounded-3xl rotate-[45deg] bg-[black] top-0 left-0"> </div> */}
     </>
   );
 }

@@ -1,8 +1,9 @@
 import "../App.css";
+import {Link} from "react-router-dom";
 
+function Navbar({user}) {
 
-function Navbar() {
-
+ console.log(user)
   return (
     <nav className="py-6 flex justify-between ">
      
@@ -17,12 +18,7 @@ function Navbar() {
           <li>Report an app</li>
         </ul>
       </div>
-      
-      <div className="flex gap-2 font-semibold text-base">
-          <Link href="/login" className="btn">Login</Link>
-
-      </div>
-      
+    {user && <div className="flex bg-slate-800 pl-3 pr-1 py-1 rounded-full items-center gap-2">{user} <button className="px-3 bg-black rounded-full h-full">Logout</button> </div>}
     </nav>
   );
 }
