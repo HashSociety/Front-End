@@ -5,7 +5,6 @@ const Scanning = () => {
   return (
     <div className="h-screen">
       <img src={logo} alt="" className="absolute top-0 right-0 w-[50%] overflow-hidden"/>
-      <Navbar />
       <div className="flex flex-col justify-center h-[50vh]">
         <div>
           <div className="text-5xl font-semibold tracking-wider courier-font">
