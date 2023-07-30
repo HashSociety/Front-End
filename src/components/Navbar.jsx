@@ -23,7 +23,10 @@ function Navbar({user}) {
       </div>
       {user ? (
         <div className="flex bg-slate-800 pl-3 pr-1 py-1 rounded-full items-center gap-2">
-          {user} <button className="px-3 bg-black rounded-full h-full">Logout</button>{" "}
+          {user} <button className="px-3 bg-black rounded-full h-full" onClick={() => {
+            localStorage.removeItem("token")
+            location.reload(); 
+            }}>Logout</button>
         </div>
       ) : (
         <Link to="/login">
