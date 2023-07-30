@@ -36,12 +36,12 @@ const App = () => {
   }, [getUserId.data]);
 
   return (
-    <div className="max-w-[80%] h-screen block mx-auto relative">
+    <div className="max-w-[90%] h-screen block mx-auto relative ">
       {shouldHideNavbar && <Navbar user={userId} />}
       <Routes>
         <Route path="/" element={<Home user={userId} />} />
 
-        <Route
+        <Route  
           path="/map"
           element={
             <Protected user={userId}>
