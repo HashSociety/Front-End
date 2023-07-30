@@ -1,24 +1,40 @@
 import "../App.css";
 import {Link} from "react-router-dom";
-
+import kavach from "../assets/kavach.png"
+import { HiOutlineLogout } from 'react-icons/hi';
 function Navbar({user}) {
+  
 
  console.log(user)
   return (
-    <nav className="py-6 flex justify-between ">
+    <nav className="py-6 flex justify-between items-center">
      
-      <div className=" flex items-center">
-        <a href="/" className="text-3xl font-bold">
-          Mesh<span className="text-primary">Hawk</span>
+      <div className="flex items-center">
+          <img src={kavach} alt="" className="w-[20%]"/>
+        <a href="/" className="text-2xl font-bold ">
+          MeshHawk
         </a>
-        <ul className="flex gap-7 text-lg font-extralight opacity-80 pl-16">
+      </div>
+      <div>
+      <ul className="flex gap-7  text-lg font-extralight opacity-80 ">
+          <li>Home</li>
           <li>About</li>
           <li>How it works?</li>
-          <li>Meet the team</li>
-          <li>Report an app</li>
+          
         </ul>
       </div>
-    {user && <div className="flex bg-slate-800 pl-3 pr-1 py-1 rounded-full items-center gap-2">{user} <button className="px-3 bg-black rounded-full h-full">Logout</button> </div>}
+      {user ? (
+        <div className="flex rounded-full items-center gap-2">
+          {user} <button className="px-3  h-full"><HiOutlineLogout size={30}/></button>{" "}
+        </div>
+      ) : (
+        <Link
+          to="/login"
+          className="px-4 py-3 bg-black border h-full text-white"
+        >
+          Login
+        </Link>
+      )}
     </nav>
   );
 }

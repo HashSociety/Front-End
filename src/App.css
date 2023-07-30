@@ -5,11 +5,19 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
 
+@font-face {
+  font-family: 'Adero Trial Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Adero Trial Regular'), url('../public/Font/AderotrialRegular-ZVreq.woff') format('woff');
+  }
+
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Adero Trial Regular", sans-serif;
 }
 body {
   @apply bg-background text-[white];
