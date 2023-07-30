@@ -5,7 +5,7 @@ function Navbar({user}) {
 
  console.log(user)
   return (
-    <nav className="py-6 flex justify-between ">
+    <nav className="py-6 flex justify-between absolute w-full ">
      
       <div className=" flex items-center">
         <a href="/" className="text-3xl font-bold">
