@@ -124,12 +124,12 @@ function Home({ currentStep, setCurrentStep, user }) {
                 </li>
 
                 <li
-                  className={`w-full border-b sm:border-b-0 px-2 ${
+                  className={`w-full border-b sm:border-b-0 py-3  px-10 ${
                     selectedValue === "scan" ? "selected" : ""
                   }`}
                 >
                   <div className="flex items-center">
-                    <button className="py-2 px-9 bg-secondary rounded" onClick={handleClick}>{`Scan ${selectedValue || "  "}`}</button>
+                    <button className="py-2 px-4 bg-secondary rounded " onClick={handleClick}>{`Scan ${selectedValue || " "}`}</button>
                   </div>
                 </li>
               </ul>
