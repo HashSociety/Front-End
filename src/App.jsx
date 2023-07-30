@@ -42,7 +42,7 @@ const App = () => {
         <Route path="/" element={<Home user={userId} />} />
 
         <Route  
-          path="/map"
+            path="/map"
           element={
             <Protected user={userId}>
               <Map />
