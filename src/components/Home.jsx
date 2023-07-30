@@ -41,7 +41,7 @@ function Home({ currentStep, setCurrentStep, user }) {
               <div className="mt-4">Select your desired time of scan --</div>
               <ul class="items-center  w-full text-sm font-medium rounded sm:flex bg-[#2D2D2D] border-[#2D2D2D] text-white mt-1">
                 <li
-                  class={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3  ${
+                  class={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 ${
                     selectedValue === "15s" ? "selected" : ""
                   }`}
                 >
@@ -54,7 +54,7 @@ function Home({ currentStep, setCurrentStep, user }) {
                       class="w-4 h-4 hidden"
                       onChange={handleRadioChange}
                     />
-                    <label for="radio-15s" class="py-2 px-10 ">
+                    <label for="radio-15s" class=" px-10 ">
                       15s
                     </label>
                   </div>
@@ -74,7 +74,7 @@ function Home({ currentStep, setCurrentStep, user }) {
                     />
                     <label
                       for="radio-30s"
-                      class="py-2 px-10   "
+                      class=" px-10   "
                     >
                       30s
                     </label>
@@ -95,14 +95,14 @@ function Home({ currentStep, setCurrentStep, user }) {
                     />
                     <label
                       for="radio-60s"
-                      class="py-2 px-10"
+                      class=" px-10"
                     >
                       45s
                     </label>
                   </div>
                 </li>
 
-                <li class={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 ${
+                <li class={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-1 ${
                     selectedValue === "60s" ? "selected" : ""
                   }`}>
                   <div class="flex items-center">
@@ -116,7 +116,7 @@ function Home({ currentStep, setCurrentStep, user }) {
                     />
                     <label
                       for="radio-120s"
-                      class="py-2 px-10  "
+                      class="py-1 px-10  "
                     >
                       60s
                     </label>
@@ -124,7 +124,7 @@ function Home({ currentStep, setCurrentStep, user }) {
                 </li>
 
                 <li
-                  className={`w-full border-b sm:border-b-0 py-3  px-10 ${
+                  className={`w-full border-b sm:border-b-0 py-3  px-5 ${
                     selectedValue === "scan" ? "selected" : ""
                   }`}
                 >

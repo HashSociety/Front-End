@@ -32,3 +32,7 @@ body {
 .logo{
   font-family: 'Adero Trial Regular', sans-serif;
 }
+
+.highcharts-background {
+  background-color: #DED9D2;
+}

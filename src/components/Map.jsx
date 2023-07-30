@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import GenerateGraph from "./GenerateGraph";
-
+import { AiOutlineFileText } from "react-icons/ai";
+import { RxCross1 } from "react-icons/rx";
 import { FileUpload } from "../api";
 
 const Map = () => {
-    const [file, setFile] = useState(null);
+  const [file, setFile] = useState(null);
   const [responseMessage, setResponseMessage] = useState(null);
   const [secresponseMessage, setsecResponseMessage] = useState(null);
 
-const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
+  const [filename, setFilename] = useState("Upload a file from your system --");
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setFilename(`${selectedFile.name}`);
+      setFile(selectedFile);
+    } else {
+      setFilename("Upload a file from your system --");
+    }
   };
 
   const handleFileUpload = async () => {
@@ -28,32 +36,93 @@ const handleFileChange = (e) => {
   };
 
   return (
-    <div className="">
-            
-            {responseMessage ? (
-              <div className="flex flex-col justify-center items-center pt-10 gap-10">
-                
-                <div >
-                  <GenerateGraph keyVar={`maingraph`} pcap={responseMessage} graphHeight={600} graphWidth={1050} className={"flex justify-center items-center bg-gray-100 rounded-2xl "} />
-                </div>
+    <div className="h-screen bg-dotted-spacing-10 bg-dotted-gray-200 ">
 
-                
-                <div className="flex flex-row gap-10 justify-center items-center">
-                  {secresponseMessage.map((result, index) => (
-                    <div key={index} className="">  
-                      <GenerateGraph keyVar={`component${index}`} pcap={result} graphHeight={300} graphWidth={500} className={"flex justify-center items-center bg-gray-100 rounded-2xl mb-6"} />  
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <div className="flex justify-center  items-center text-[white] h-screen">
-                <input type="file" onChange={handleFileChange} />
-                <button onClick={handleFileUpload}>Upload</button>
-              </div>
-            )}
+      {responseMessage ? (
+        <div className="flex flex-row justify-center items-center pt-10 gap-7 z-1 ">
+          <div className="absolute w-[900px] h-[600px] bg-black opacity-[80%] bottom-10 left-5 rounded-2xl "></div>
+          <div className="mt-10 ml-10">
+            <GenerateGraph
+              keyVar={`maingraph`}
+              pcap={responseMessage}
+              graphHeight={600}
+              graphWidth={900}
+              className={
+                "flex justify-center items-center bg-[#DED9D2] opacity-[50%] rounded-2xl "
+              }
+            />
           </div>
-  )
-}
 
-export default Map
+          <div className=" flex flex-col gap-5 justify-center items-center">
+            {secresponseMessage.map((result, index) => (
+              <div key={index} className="">
+                <GenerateGraph
+                  keyVar={`component${index}`}
+                  pcap={result} 
+                  graphHeight={250}
+                  graphWidth={400}
+                  className={
+                    "flex justify-center items-center bg-[#DED9D2] opacity-[50%] rounded-2xl "
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="flex justify-center  items-center text-[white] h-screen bg-dotted-spacing-10 bg-dotted-gray-600">
+          <div className="w-[80%] px-[20%] py-[5%] flex flex-col justify-center items-center bg-[#161616] rounded-2xl">
+            <div className="w-[100%]">
+              <fieldset className=" flex border py-3 pr-4 pl-4">
+                <legend className="text-[0.7rem]">
+                  Here is the .pcap file generated from previous step{" "}
+                </legend>
+                <div className=" w-full flex justify-between items-center">
+                  <div className="flex gap-2 justify-center items-center">
+                    <AiOutlineFileText size={20} />
+                    <span>filename.pcap</span>
+                  </div>
+                  <div>
+                    <RxCross1 />
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div className="mt-5 opacity-20">-----OR-----</div>
+            <div className="mt-5 w-[100%]">
+              <div className="w-full">
+                <fieldset className="flex border py-2 pr-2 pl-3 b">
+                  <div className="w-full flex justify-between items-center">
+                    <div className="flex justify-center items-center">
+                      <span>{filename}</span>
+                    </div>
+                    <div>
+                      <label class=" flex flex-col items-center px-6 py-2 rounded bg-[#2E59BF]   cursor-pointer">
+                        <span class="text-base leading-normal">Upload</span>
+                        <input
+                          type="file"
+                          class="hidden"
+                          onChange={handleFileChange}
+                        />
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div>
+              <button
+                className="mt-5 uppercase px-4 py-2 text-black bg-white"
+                onClick={handleFileUpload}
+              >
+                Analyze
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Map;
