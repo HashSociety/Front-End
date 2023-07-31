@@ -6,7 +6,7 @@ function Navbar({user}) {
 
  console.log(user)
   return (
-    <nav className="py-5 flex justify-between h-[10%] items-center absolute w-full bg-black">
+    <nav className="py-5 flex justify-between h-[10%] items-center absolute w-full ">
      
       <div className="flex items-center">
         <a href="/" className="text-2xl font-bold flex items-center logo">

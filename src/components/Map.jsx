@@ -36,11 +36,11 @@ const Map = () => {
   };
 
   return (
-    <div className="h-screen bg-dotted-spacing-10 bg-dotted-gray-200 ">
+    <div className="h-screen ">
 
       {responseMessage ? (
         <div className="flex flex-row justify-center items-center pt-10 gap-7 z-1 ">
-          <div className="absolute w-[900px] h-[600px] bg-black opacity-[80%] bottom-10 left-5 rounded-2xl "></div>
+          {/* <div className="absolute w-[900px] h-[600px] bg-black bottom-10 left-5 rounded-2xl "></div> */}
           <div className="mt-10 ml-10">
             <GenerateGraph
               keyVar={`maingraph`}
@@ -48,7 +48,7 @@ const Map = () => {
               graphHeight={600}
               graphWidth={900}
               className={
-                "flex justify-center items-center bg-[#DED9D2] opacity-[50%] rounded-2xl "
+                "flex justify-center items-center bg-gray-950  border-2  rounded-2xl "
               }
             />
           </div>
@@ -62,7 +62,7 @@ const Map = () => {
                   graphHeight={250}
                   graphWidth={400}
                   className={
-                    "flex justify-center items-center bg-[#DED9D2] opacity-[50%] rounded-2xl "
+                    "flex justify-center items-center bg-slate-950 border-2   rounded-2xl "
                   }
                 />
               </div>

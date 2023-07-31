@@ -24,7 +24,7 @@
 
 
 body {
-  @apply bg-primary text-[white] ;
+  @apply bg-primary text-[white] bg-dotted-spacing-10 bg-dotted-gray-700/70;
 }
 
 
@@ -33,6 +33,6 @@ body {
   font-family: 'Adero Trial Regular', sans-serif;
 }
 
-.highcharts-background {
-  background-color: #DED9D2;
+.highcharts-no-tooltip{
+  border-radius: 50px;
 }

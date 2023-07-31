@@ -135,7 +135,7 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,cla
     const chartOptions = {
       chart: {
         type: 'networkgraph',
-        // backgroundColor: 'transparent',
+        backgroundColor: 'transparent',
       },
       title: {
         text: '',
@@ -147,15 +147,17 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,cla
                 integration: 'verlet', // Use 'verlet' to have a fixed distance between nodes
               },
           marker: {
-            fillColor: '#FFFFFF',
+            fillColor: 'blue',
             lineWidth: 8,
-            lineColor: 'blue',
+            lineColor: 'white',
             radius: 15,
+            zIndex: 2,
           },
           link: {
-            color: 'blue',
+            color: 'white',
             dashStyle: 'solid ',
             linkDirection: 'both',
+            zIndex: 1,
           },
         },
       },
@@ -166,9 +168,10 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,cla
             enabled: true,
             linkFormat: '',
             style: {
-              color: 'black',
+              
+              color: 'white',
               fontSize: '16px',
-              fontWeight: 'bold',
+              fontWeight: '',
             },
             y: -20,
           },
@@ -176,6 +179,7 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,cla
           data: nodes,
         },
       ],
+      
     };
 
     Highcharts.chart(`key ${keyVar}`, chartOptions);
