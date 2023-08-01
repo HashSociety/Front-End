@@ -16,7 +16,7 @@ export const  getPcap = async () => {
     formData.append("pcapng_file", file);
   
     try {
-      const response = await axios.post("http://127.0.0.1:8000/upload", formData, {
+      const response = await axios.post("http://127.0.0.1:8000/upload/pcap", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

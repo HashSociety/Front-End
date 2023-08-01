@@ -6,8 +6,13 @@ import {useAtom}  from "jotai"
 import { stableAtom } from "../store";
 
 function Home({ currentStep, setCurrentStep, user }) {
+
+  const [showTest, setShowTest] = useState(false);
+
+  const scan = () =>{
+    setShowTest((prevShowTest) => !prevShowTest);
+  }
   const [value, setValue] = useAtom(stableAtom)
-  console.log(value)
   console.log(value)
   const navigate = useNavigate();
   const handleClick = () => {
@@ -36,13 +41,13 @@ function Home({ currentStep, setCurrentStep, user }) {
           <br /> - reshaping cyber security for the better!!
           <div className="flex flex-col absolute bg-black rounded-lg">
             <div className="flex gap-5 ml-5 mt-7 w-fit pl-2 pr-2 py-2 bg-[#2D2D2D] rounded">
-              <button className="border py-1 px-6 bg-white text-black  rounded">
+              <button className="border py-1 px-6 bg-white text-black rounded" onClick={scan}>
                 Get Started
               </button>
               <button className="py-1 px-6  rounded">Learn More</button>
             </div>
 
-            <div className="bg-black px-6 py-4 rounded-lg" >
+            <div className={`bg-black px-6 py-4 rounded-lg transition-all  ${showTest ? "" : "hidden"}`} >
               <div className="mt-4">Select your desired time of scan --</div>
               <ul class="items-center  w-full text-sm font-medium rounded sm:flex bg-[#2D2D2D] border-[#2D2D2D] text-white mt-1">
                 <li
@@ -50,7 +55,7 @@ function Home({ currentStep, setCurrentStep, user }) {
                     selectedValue === "15s" ? "selected" : ""
                   }`}
                 >
-                  <div class="flex items-center">
+                  <div class="flex items-center cursor-pointer">
                     <input
                       id="radio-15s"
                       type="radio"
@@ -59,16 +64,16 @@ function Home({ currentStep, setCurrentStep, user }) {
                       class="w-4 h-4 hidden"
                       onChange={handleRadioChange}
                     />
-                    <label for="radio-15s" class=" px-10 ">
+                    <label for="radio-15s" class=" px-10 cursor-pointer">
                       15s
                     </label>
                   </div>
                 </li>
 
-                <li class={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 ${
+                <li class={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 cursor-pointer ${
                     selectedValue === "15s" ? "selected" : ""
                   }`}>
-                  <div class="flex items-center">
+                  <div class="flex items-center cursor-pointer">
                     <input
                       id="radio-30s"
                       type="radio"
@@ -79,17 +84,17 @@ function Home({ currentStep, setCurrentStep, user }) {
                     />
                     <label
                       for="radio-30s"
-                      class=" px-10   "
+                      class=" px-10  cursor-pointer  "
                     >
                       30s
                     </label>
                   </div>
                 </li>
 
-                <li class={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 ${
+                <li class={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 cursor-pointer ${
                     selectedValue === "45s" ? "selected" : ""
                   }`}>
-                  <div class="flex items-center">
+                  <div class="flex items-center cursor-pointer">
                     <input
                       id="radio-60s"
                       type="radio"
@@ -100,17 +105,17 @@ function Home({ currentStep, setCurrentStep, user }) {
                     />
                     <label
                       for="radio-60s"
-                      class=" px-10"
+                      class=" px-10 cursor-pointer"
                     >
                       45s
                     </label>
                   </div>
                 </li>
 
-                <li class={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-1 ${
+                <li class={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-1 cursor-pointer ${
                     selectedValue === "60s" ? "selected" : ""
                   }`}>
-                  <div class="flex items-center">
+                  <div class="flex items-center cursor-pointer">
                     <input
                       id="radio-120s"
                       type="radio"
@@ -121,7 +126,7 @@ function Home({ currentStep, setCurrentStep, user }) {
                     />
                     <label
                       for="radio-120s"
-                      class="py-1 px-10  "
+                      class="py-1 px-10  cursor-pointer "
                     >
                       60s
                     </label>
@@ -133,15 +138,15 @@ function Home({ currentStep, setCurrentStep, user }) {
                     selectedValue === "scan" ? "selected" : ""
                   }`}
                 >
-                  <div className="flex items-center">
-                    <button className="py-2 px-4 bg-secondary rounded " onClick={handleClick}>{`Scan ${selectedValue || " "}`}</button>
+                  <div className="flex items-center ">
+                    <button className="py-2 px-4 bg-secondary rounded  " onClick={handleClick}>{`Scan ${selectedValue || " "}`}</button>
                   </div>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="h-[60%]">
+        <div className="h-[60%] ">
           <img
             src={homeimg}
             alt=""

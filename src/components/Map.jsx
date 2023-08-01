@@ -48,7 +48,7 @@ const Map = () => {
               graphHeight={600}
               graphWidth={900}
               className={
-                "flex justify-center items-center bg-gray-950  border-2  rounded-2xl "
+                "flex justify-center items-center bg-[#0F4C75] bg-opacity-20 border-2 border-[#323232]  rounded-2xl "
               }
             />
           </div>
@@ -62,7 +62,7 @@ const Map = () => {
                   graphHeight={250}
                   graphWidth={400}
                   className={
-                    "flex justify-center items-center bg-slate-950 border-2   rounded-2xl "
+                    "flex justify-center items-center bg-[#0F4C75] bg-opacity-20 border-2 border-[#323232]   rounded-2xl "
                   }
                 />
               </div>
@@ -70,7 +70,7 @@ const Map = () => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center  items-center text-[white] h-screen bg-dotted-spacing-10 bg-dotted-gray-600">
+        <div className="flex justify-center  items-center text-[white] h-screen ">
           <div className="w-[80%] px-[20%] py-[5%] flex flex-col justify-center items-center bg-[#161616] rounded-2xl">
             <div className="w-[100%]">
               <fieldset className=" flex border py-3 pr-4 pl-4">
