@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import logo from "../assets/hero.png";
 import homeimg from "../assets/Mask.png";
 import { useNavigate, Link } from "react-router-dom";
+import {useAtom}  from "jotai"
+import { stableAtom } from "../store";
 
 function Home({ currentStep, setCurrentStep, user }) {
+  const [value, setValue] = useAtom(stableAtom)
+  console.log(value)
+  console.log(value)
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/map");
@@ -18,7 +23,7 @@ function Home({ currentStep, setCurrentStep, user }) {
 
   return (
     <>
-      <div className="flex flex-col h-screen w-full gap-5 bg-dotted-spacing-10 bg-dotted-gray-600">
+      <div className="flex flex-col h-screen w-full gap-5 ">
         <div className=" text-7xl inline mt-[10%] flex-col ml-[10%] uppercase">
           unveiling THE <br /> hidden{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-900 via-blue-700 to-white">

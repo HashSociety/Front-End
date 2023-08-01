@@ -24,7 +24,7 @@
 
 
 body {
-  @apply bg-primary text-[white] bg-dotted-spacing-10 bg-dotted-gray-700/70;
+  @apply bg-primary text-[white] bg-dotted-spacing-10 bg-dotted-gray-700;
 }
 
 
