@@ -2,7 +2,7 @@ import mesh from "../assets/kavach.png";
 import logo from "../assets/logo-bg.png";
 const Prototype = () => {
   return (
-    <div className="flex gap-10 w-full justify-center items-center bg-dotted-spacing-10 bg-dotted-gray-200">
+    <div className="flex gap-10 w-full justify-center items-center ">
       <img
         src={logo}
         alt=""
@@ -63,69 +63,64 @@ const Prototype = () => {
         </div>
       </div>
 
-      <div className="flex flex-col w-[50%] h-[80vh]">
+      <div className="flex flex-col w-[50%] h-[80vh] ">
         <div className="min-h-[60%] w-full bg-white rounded-2xl"></div>
-        <div className="h-full grid grid-cols-2  gap-2 mt-10">
-          <div className="flex flex-col p-3  h-fit rounded-2xl bg-white text-black ">
+        <div className="h-full grid grid-cols-2 bg-[#DFE0E0] rounded-2xl p-5 gap-6 mt-5">
+          <div className="flex flex-col p-3 border-r-4 border-b-4  border-gray-500 h-fit rounded-2xl  text-black ">
+            <div className="flex items-center justify-between">
             <span className="text-2xl courier-font ">Density</span>
+            <div className="text-2xl">23.3</div>
+            </div>
             <p className="tex-1xl">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Assumenda, iste!
             </p>
-            <span className=" courier-font text-2xl text-primary">
-              23.23
-            </span>
+      
           </div>
-          <div className="flex flex-col p-3  h-fit rounded-2xl bg-white text-black ">
+          <div className="flex flex-col p-3 border-l-4 border-b-4  border-gray-500 h-fit rounded-2xl  text-black ">
+            <div className="flex items-center justify-between">
             <span className="text-2xl courier-font ">Density</span>
+            <div className="text-2xl">23.3</div>
+            </div>
             <p className="tex-1xl">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Assumenda, iste!
             </p>
-            <span className=" courier-font text-2xl text-primary">
-              23.23
-            </span>
+      
           </div>
-          <div className="flex flex-col p-3  h-fit rounded-2xl bg-white text-black ">
+          <div className="flex flex-col p-3 border-r-4 border-b-4  border-gray-500 h-fit rounded-2xl  text-black ">
+            <div className="flex items-center justify-between">
             <span className="text-2xl courier-font ">Density</span>
+            <div className="text-2xl">23.3</div>
+            </div>
             <p className="tex-1xl">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Assumenda, iste!
             </p>
-            <span className=" courier-font text-2xl text-primary">
-              23.23
-            </span>
+      
           </div>
-          <div className="flex flex-col p-3  h-fit rounded-2xl bg-white text-black ">
+          <div className="flex flex-col p-3 border-l-4 border-b-4  border-gray-500 h-fit rounded-2xl  text-black ">
+            <div className="flex items-center justify-between">
             <span className="text-2xl courier-font ">Density</span>
+            <div className="text-2xl">23.3</div>
+            </div>
             <p className="tex-1xl">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Assumenda, iste!
             </p>
-            <span className=" courier-font text-2xl text-primary">
-              23.23
-            </span>
+      
           </div>
-          <div className="flex flex-col p-3  h-fit rounded-2xl bg-white text-black ">
-            <span className="text-2xl courier-font ">Density</span>
-            <p className="tex-1xl">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda, iste!
-            </p>
-            <span className="  courier-font text-2xl text-primary">
-              23.23
-            </span>
-          </div>
+
           
          
         </div>
       </div>
 
       <div className="flex gap-5 fixed bottom-0 justify-center bg-black bg-opacity-50 p-1 w-full">
-        <button className=" bg-white text-black py-1 px-10 rounded font-normal">
+        <button className=" bg-gray-300 bg-opacity-70 text-black py-1 px-6 rounded-lg font-normal">
           Attack
         </button>
-        <button className=" bg-white text-black py-2 px-10 rounded font-normal">
+        <button className=" bg-gray-300 bg-opacity-70 text-black py-2 px-6 rounded-lg font-normal">
           Download
         </button>
       </div>
