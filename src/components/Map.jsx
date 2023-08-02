@@ -4,14 +4,17 @@ import { AiOutlineFileText } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
 import { FileUpload } from "../api";
 import { useMutation } from "@tanstack/react-query";
-
+import { useAtom } from "jotai";
+import { mapAtom } from "../store";
 
 const Map = () => {
   const [file, setFile] = useState(null);
   const [responseMessage, setResponseMessage] = useState(null);
   const [secresponseMessage, setsecResponseMessage] = useState(null);
+  const [mapData, setMapData] = useAtom(mapAtom);
 
 
+console.log("mapData",mapData)
   const [filename, setFilename] = useState("Upload a file from your system --");
 
   const handleFileChange = (event) => {
@@ -26,6 +29,7 @@ const Map = () => {
 
   const componentMutation = useMutation(FileUpload, {
     onSuccess: (data) => {
+      setMapData(data)
       setResponseMessage(data.addresses);
 
       const componentsData = data.compenents;

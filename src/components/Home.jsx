@@ -3,16 +3,21 @@ import logo from "../assets/hero.png";
 import homeimg from "../assets/Mask.png";
 import { useNavigate, Link } from "react-router-dom";
 import {useAtom}  from "jotai"
-import { stableAtom } from "../store";
+import { mapAtom } from "../store";
+
+
 
 function Home({ user }) {
+  const [mapData, setMapData] = useAtom(mapAtom);
+
+
+console.log("mapData",mapData)
 
   const [showTest, setShowTest] = useState(false);
 
   const scan = () =>{
     setShowTest((prevShowTest) => !prevShowTest);
   }
-  const [value, setValue] = useAtom(stableAtom)
 
   const navigate = useNavigate();
   const handleClick = () => {
