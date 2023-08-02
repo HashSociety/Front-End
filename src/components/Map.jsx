@@ -3,11 +3,14 @@ import GenerateGraph from "./GenerateGraph";
 import { AiOutlineFileText } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
 import { FileUpload } from "../api";
+import { useMutation } from "@tanstack/react-query";
+
 
 const Map = () => {
   const [file, setFile] = useState(null);
   const [responseMessage, setResponseMessage] = useState(null);
   const [secresponseMessage, setsecResponseMessage] = useState(null);
+
 
   const [filename, setFilename] = useState("Upload a file from your system --");
 
@@ -21,23 +24,18 @@ const Map = () => {
     }
   };
 
-  const handleFileUpload = async () => {
-    try {
-      const responseData = await FileUpload(file);
-      setResponseMessage(responseData.addresses);
+  const componentMutation = useMutation(FileUpload, {
+    onSuccess: (data) => {
+      setResponseMessage(data.addresses);
 
-      const componentsData = responseData.compenents;
+      const componentsData = data.compenents;
       const keys = Object.keys(componentsData);
       const parsedComponentsArray = keys.map((key) => componentsData[key]);
       setsecResponseMessage(parsedComponentsArray);
-    } catch (error) {
-      console.error("Error occurred during file upload:", error.message);
-    }
-  };
-
+    },
+  });
   return (
     <div className="h-screen ">
-
       {responseMessage ? (
         <div className="flex flex-row justify-center items-center pt-10 gap-7 z-1 ">
           {/* <div className="absolute w-[900px] h-[600px] bg-black bottom-10 left-5 rounded-2xl "></div> */}
@@ -52,13 +50,12 @@ const Map = () => {
               }
             />
           </div>
-
           <div className=" flex flex-col gap-5 justify-center items-center">
             {secresponseMessage.map((result, index) => (
               <div key={index} className="">
                 <GenerateGraph
                   keyVar={`component${index}`}
-                  pcap={result} 
+                  pcap={result}
                   graphHeight={250}
                   graphWidth={400}
                   className={
@@ -97,11 +94,11 @@ const Map = () => {
                       <span>{filename}</span>
                     </div>
                     <div>
-                      <label class=" flex flex-col items-center px-6 py-2 rounded bg-[#2E59BF]   cursor-pointer">
-                        <span class="text-base leading-normal">Upload</span>
+                      <label className=" flex flex-col items-center px-6 py-2 rounded bg-[#2E59BF]   cursor-pointer">
+                        <span className="text-base leading-normal">Upload</span>
                         <input
                           type="file"
-                          class="hidden"
+                          className="hidden"
                           onChange={handleFileChange}
                         />
                       </label>
@@ -113,7 +110,7 @@ const Map = () => {
             <div>
               <button
                 className="mt-5 uppercase px-4 py-2 text-black bg-white"
-                onClick={handleFileUpload}
+                onClick={() => componentMutation.mutate(file)}
               >
                 Analyze
               </button>
