@@ -16,7 +16,6 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,cla
   const url = import.meta.env.VITE_BACKEND_URL;
 
   const { data, isLoading, isError, height, width } = useQuery(['getpcap'], getPcap);
-  console.log(data);
 
   const nodes = []; 
   

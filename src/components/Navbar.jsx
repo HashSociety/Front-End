@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 function Navbar({user}) {
 
- console.log(user)
+
   return (
     <nav className="py-5 flex justify-between h-[10%] items-center absolute w-full z-50">
      

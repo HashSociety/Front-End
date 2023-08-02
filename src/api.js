@@ -23,7 +23,6 @@ export const  getPcap = async () => {
       });
   
       if (response.status === 200) {
-        console.log(response.data)
         return response.data;
       } else {
         throw new Error("Failed to upload the file.");
@@ -37,7 +36,6 @@ export const  getPcap = async () => {
   export const getLoginToken = async (loginFormData) => {
     try {
       if (!loginFormData) return;
-      console.log(loginFormData);
       const params = new URLSearchParams(loginFormData);
 
 

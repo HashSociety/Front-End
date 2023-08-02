@@ -20,10 +20,8 @@ const App = () => {
   const [userId, setUserId] = useState(null);
   const token = localStorage.getItem("token");
   const getUserId = useQuery(["user"], async () => getUser(token), {
-    refetchOnWindowFocus: false,
-    enabled: !!token,
+    enabled: !!token, 
   });
-
   useEffect(() => {
     hideNavbarPaths.includes(location.pathname)
       ? setShouldHideNavbar(false)
@@ -34,7 +32,7 @@ const App = () => {
     if (localStorage.getItem("token") === null) return;
     const { data, isLoading, isError, error } = getUserId;
     data && setUserId(data.userid);
-  }, [getUserId.data]);
+  }, [getUserId.data ]);
 
   return (
     <div className="max-w-[90%] h-screen block mx-auto relative ">
