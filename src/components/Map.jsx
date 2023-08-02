@@ -14,7 +14,6 @@ const Map = () => {
   const [mapData, setMapData] = useAtom(mapAtom);
 
 
-console.log("mapData",mapData)
   const [filename, setFilename] = useState("Upload a file from your system --");
 
   const handleFileChange = (event) => {

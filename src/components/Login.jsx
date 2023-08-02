@@ -8,7 +8,8 @@ function Login() {
   const loginMutation = useMutation(getLoginToken);
 
   const setTokenToStorage = (token) => {
-    localStorage.setItem("token", token);
+    localStorage.removeItem("token");
+    localStorage.setItem("token", token); 
   };
 
   const loginSubmit = async (e) => {

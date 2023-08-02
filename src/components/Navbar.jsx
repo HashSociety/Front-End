@@ -1,8 +1,10 @@
 import "../App.css";
 import Kavach from "../assets/kavach.png";
 import { Link } from "react-router-dom";
+import Loading from "./Loading";
 
-function Navbar({ user }) {
+function Navbar({ user , userLoading }) {
+
   return (
     <nav className="py-5 flex justify-between h-[10%] items-center absolute w-full z-50">
       <div className="flex items-center">
@@ -25,19 +27,22 @@ function Navbar({ user }) {
             className="px-3 bg-black rounded-full h-full"
             onClick={() => {
               localStorage.removeItem("token");
-              location.reload();
+              window.location.reload(); // Corrected "location.reload();" to "window.location.reload();"
             }}
           >
             Logout
           </button>
         </div>
       ) : (
-        <Link to="/login">
-          <button className="px-6 py-3 border  bg-black  h-full">Login</button>
-        </Link>
+        localStorage.getItem("token") && userLoading ? <Loading className={"w-8"} /> : (
+          <Link to="/login">
+            <button className="px-6 py-3 border  bg-black  h-full">Login</button>
+          </Link>
+        )
       )}
     </nav>
   );
+  
 }
 
 export default Navbar;

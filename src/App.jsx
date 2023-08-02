@@ -30,13 +30,12 @@ const App = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) return;
-    const { data, isLoading, isError, error } = getUserId;
-    data && setUserId(data.userid);
-  }, [getUserId.data ]);
-
+    getUserId.data && setUserId(getUserId.data.userid);
+  }, [getUserId.data]);
+  
   return (
     <div className="max-w-[90%] h-screen block mx-auto relative ">
-      {shouldHideNavbar && <Navbar user={userId} />}
+      {shouldHideNavbar && <Navbar user={userId} userLoading={getUserId.isLoading} />}
       <Routes>
         <Route path="/" element={<Home user={userId} />} />
 
