@@ -45,8 +45,8 @@ function Home({ user }) {
               </button>
               <button className="py-1 px-6  rounded">Learn More</button>
             </div>
-
-            <div className={`bg-black px-6 py-4 rounded-lg transition-all  ${showTest ? "" : "hidden"}`} >
+            {user && (
+            <div className={`bg-black px-6 py-4 rounded-lg transition-all test  ${showTest ? "" : "hidden"}`} >
               <div className="mt-4">Select your desired time of scan --</div>
               <ul className="items-center  w-full text-sm font-medium rounded sm:flex bg-[#2D2D2D] border-[#2D2D2D] text-white mt-1">
                 <li
@@ -143,6 +143,7 @@ function Home({ user }) {
                 </li>
               </ul>
             </div>
+            )}
           </div>
         </div>
         <div className="h-[60%] ">
