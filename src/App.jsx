@@ -11,6 +11,7 @@ import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "./api";
 import Protected from "./components/Protected";
+import Logs from "./components/Logs";
 
 const App = () => {
   const [shouldHideNavbar, setShouldHideNavbar] = useState(false);
@@ -66,6 +67,7 @@ const App = () => {
           }
         />
 
+        <Route path="/logs" element={<Logs/>}/>
         <Route path="/login" element={<Login />} />
       </Routes>
     </div>
