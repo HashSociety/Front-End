@@ -8,20 +8,20 @@ const Prototype = () => {
         alt=""
         className="absolute top-0 right-0 w-[50%] overflow-hidden"
       />
-      <div className="w-[40%] bg-[#F4F5F5] pl-5 pt-3 rounded-lg mt-20 ">
-        <div className="text-2xl text-black uppercase"> Analyze!</div>
+      <div className="w-[40%] border bg-[#03051E]  bg-opacity-30 pl-5 pt-3 text-white rounded-lg mt-20 ">
+        <div className="text-2xl text-white uppercase"> Analyze!</div>
 
-        <div className=" flex border-1 m-4 ml-0 border-r border-b border-gray-300 rounded-2xl p-3 text-black">
+        <div className=" flex border-1  m-4 ml-0 border-r border-b border-gray-300 rounded-2xl p-3 text-white">
           <div className="text-2xl courier-font">1.</div>
           <div>
             <span className=" courier-font text-2xl">AODB</span>
-            <p>Protocols
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio,
-              explicabo!
+            <p>
+              Protocols Lorem ipsum dolor, sit amet consectetur adipisicing
+              elit. Optio, explicabo!
             </p>
           </div>
         </div>
-        <div className=" flex border-1 m-4 ml-0 border-r border-b border-gray-300 rounded-2xl p-3 text-black  ">
+        <div className=" flex border-1 m-4 ml-0 border-r border-b border-gray-300 rounded-2xl p-3 text-white  ">
           <div className="text-2xl courier-font">1.</div>
           <div>
             <span className=" courier-font text-2xl">AODB</span>
@@ -31,17 +31,17 @@ const Prototype = () => {
             </p>
           </div>
         </div>
-        <div className=" flex border-1 m-4 ml-0 border-r border-b border-gray-300 rounded-2xl p-3 text-black ">
+        <div className=" flex border-1 m-4 ml-0 border-r border-b border-gray-300 rounded-2xl p-3 text-white ">
           <div className="text-2xl courier-font">1.</div>
           <div>
-            <span className=" courier-font text-2xl">AODB</span>
+            <span className=" courier-font text-2xl">AODBAODB</span>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio,
               explicabo!
             </p>
           </div>
         </div>
-        <div className=" flex border-1 m-4 ml-0 border-r border-b  border-gray-300 rounded-2xl p-3 text-black ">
+        <div className=" flex border-1 m-4 ml-0 border-r border-b  border-gray-300 rounded-2xl p-3 text-white ">
           <div className="text-2xl courier-font">1.</div>
           <div>
             <span className=" courier-font text-2xl ">AODB</span>
@@ -51,7 +51,7 @@ const Prototype = () => {
             </p>
           </div>
         </div>
-        <div className=" flex border-1 m-4 ml-0 border-r border-b  border-gray-300 rounded-2xl p-3 text-black ">
+        <div className=" flex border-1 m-4 ml-0 border-r border-b  border-gray-300 rounded-2xl p-3 text-white ">
           <div className="text-2xl courier-font">1.</div>
           <div>
             <span className=" courier-font text-2xl ">AODB</span>
@@ -64,56 +64,52 @@ const Prototype = () => {
       </div>
 
       <div className="flex flex-col w-[50%] h-[80vh] ">
-        <div className="min-h-[60%] w-full bg-white rounded-2xl"></div>
-        <div className="h-full grid grid-cols-2 bg-[#DFE0E0] rounded-2xl p-5 gap-6 mt-5">
-          <div className="flex flex-col p-3 border-r-4 border-b-4  border-gray-500 h-fit rounded-2xl  text-black ">
-            <div className="flex items-center justify-between">
-            <span className="text-2xl courier-font ">Density</span>
-            <div className="text-2xl">23.3</div>
+        <div className="min-h-[60%] w-full border  rounded-2xl"></div>
+        <div className="h-full grid grid-cols-4 rounded-2xl p-5 gap-6 mt-1">
+          <div className="flex flex-col p-3 border  border-gray-500 h-full rounded-2xl  text-white ">
+            <div className="flex flex-col items-center justify-between">
+              <span className="text-2xl courier-font ">Density</span>
+              <div className="text-2xl">23.3</div>
             </div>
-            <p className="tex-1xl">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda, iste!
-            </p>
-      
-          </div>
-          <div className="flex flex-col p-3 border-l-4 border-b-4  border-gray-500 h-fit rounded-2xl  text-black ">
-            <div className="flex items-center justify-between">
-            <span className="text-2xl courier-font ">Density</span>
-            <div className="text-2xl">23.3</div>
-            </div>
-            <p className="tex-1xl">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda, iste!
-            </p>
-      
-          </div>
-          <div className="flex flex-col p-3 border-r-4 border-b-4  border-gray-500 h-fit rounded-2xl  text-black ">
-            <div className="flex items-center justify-between">
-            <span className="text-2xl courier-font ">Density</span>
-            <div className="text-2xl">23.3</div>
-            </div>
-            <p className="tex-1xl">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda, iste!
-            </p>
-      
-          </div>
-          <div className="flex flex-col p-3 border-l-4 border-b-4  border-gray-500 h-fit rounded-2xl  text-black ">
-            <div className="flex items-center justify-between">
-            <span className="text-2xl courier-font ">Density</span>
-            <div className="text-2xl">23.3</div>
-            </div>
-            <p className="tex-1xl">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Assumenda, iste!
-            </p>
-      
-          </div>
-
           
-         
+            <p className="tex-1xl">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Assumenda, iste!
+            </p>
+          </div>
+          <div className="flex flex-col p-3 border  border-gray-500 h-fit rounded-2xl  text-white ">
+            <div className="flex flex-col items-center justify-between">
+              <span className="text-2xl courier-font ">Density</span>
+              <div className="text-2xl">23.3</div>
+            </div>
+            <p className="tex-1xl">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Assumenda, iste!
+            </p>
+          </div>
+          <div className="flex flex-col p-3 border  border-gray-500 h-fit rounded-2xl  text-white ">
+            <div className="flex flex-col items-center justify-between">
+              <span className="text-2xl courier-font ">Density</span>
+              <div className="text-2xl">23.3</div>
+            </div>
+            <p className="tex-1xl">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Assumenda, iste!
+            </p>
+          </div>
+          <div className="flex flex-col p-3 border  border-gray-500 h-fit rounded-2xl  text-white ">
+            <div className="flex flex-col items-center justify-between">
+              <span className="text-2xl courier-font ">Density</span>
+              <div className="text-2xl">23.3</div>
+            </div>
+            <p className="tex-1xl">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Assumenda, iste!
+            </p>
+          </div>
+          
         </div>
+        
       </div>
 
       <div className="flex gap-5 fixed bottom-0 justify-center bg-black bg-opacity-50 p-1 w-full">
