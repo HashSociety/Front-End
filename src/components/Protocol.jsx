@@ -2,7 +2,12 @@ import mesh from "../assets/kavach.png";
 import logo from "../assets/logo-bg.png";
 import { GiOverkill } from "react-icons/gi";
 import { BiDownload } from "react-icons/bi";
+import {mapAtom} from "../store"
+import {useAtom} from "jotai"
+
 const Prototype = () => {
+  const [mapData, setMapData] = useAtom(mapAtom);
+  console.log(mapData)
   return (
     <div className="flex gap-10 w-full justify-center items-center ">
       <img

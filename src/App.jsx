@@ -12,6 +12,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getUser } from "./api";
 import Protected from "./components/Protected";
 import Logs from "./components/Logs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [shouldHideNavbar, setShouldHideNavbar] = useState(false);
@@ -20,7 +22,7 @@ const App = () => {
   const [userId, setUserId] = useState(null);
   const token = localStorage.getItem("token");
   const getUserId = useQuery(["user"], async () => getUser(token), {
-    enabled: !!token, 
+    enabled: !!token,
   });
   useEffect(() => {
     hideNavbarPaths.includes(location.pathname)
@@ -32,15 +34,19 @@ const App = () => {
     if (localStorage.getItem("token") === null) return;
     getUserId.data && setUserId(getUserId.data.userid);
   }, [getUserId.data]);
-  
+
+
+
   return (
     <div className="max-w-[90%] h-screen block mx-auto relative ">
-      {shouldHideNavbar && <Navbar user={userId} userLoading={getUserId.isLoading} />}
+      {shouldHideNavbar && (
+        <Navbar user={userId} userStatus={getUserId.status} />
+      )}
       <Routes>
         <Route path="/" element={<Home user={userId} />} />
 
-        <Route  
-            path="/map"
+        <Route
+          path="/map"
           element={
             <Protected user={userId}>
               <Map />
@@ -51,7 +57,7 @@ const App = () => {
           path="/protocol"
           element={
             // <Protected user={userId}>
-              <Protocol />
+            <Protocol />
             // </Protected>
           }
         />
@@ -59,14 +65,27 @@ const App = () => {
           path="/scan"
           element={
             // <Protected user={userId}>
-              <Scanning />
+            <Scanning />
             // </Protected>
           }
         />
 
-        <Route path="/logs" element={<Logs/>}/>
+        <Route path="/logs" element={<Logs />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+    
+      <ToastContainer
+        position="bottom-left"
+        autoClose={4997}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

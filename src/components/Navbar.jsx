@@ -3,7 +3,7 @@ import Kavach from "../assets/kavach.png";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 
-function Navbar({ user , userLoading }) {
+function Navbar({ user , userStatus }) {
 
   return (
     <nav className="py-5 flex justify-between h-[10%] items-center absolute w-full z-50">
@@ -34,7 +34,7 @@ function Navbar({ user , userLoading }) {
           </button>
         </div>
       ) : (
-        localStorage.getItem("token") && userLoading ? <Loading className={"w-8"} /> : (
+        localStorage.getItem("token") && userStatus === "loading" ? <Loading className={"w-8"} /> : (
           <Link to="/login">
             <button className="px-6 py-3 border  bg-black  h-full">Login</button>
           </Link>
