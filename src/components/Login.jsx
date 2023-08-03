@@ -2,12 +2,14 @@ import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { getLoginToken } from "../api";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 function Login() {
   const loginMutation = useMutation(getLoginToken);
 
   const setTokenToStorage = (token) => {
-    localStorage.setItem("token", token);
+    localStorage.removeItem("token");
+    localStorage.setItem("token", token); 
   };
 
   const loginSubmit = async (e) => {
@@ -26,10 +28,10 @@ function Login() {
     <div className="w-full text-white h-full flex justify-center items-center">
       <div className="flex flex-col gap-3">
         <div className="flex items-center">
-          <a href="/" className="text-2xl font-bold flex items-center logo">
+          <Link to="/" className="text-2xl font-bold flex items-center logo">
             <img src="/kavach.png" className="w-[15%]" />
             MeshHawk
-          </a>
+          </Link>
         </div>
         <form
           className="bg-primary border-2 rounded-xl shadow-md px-8 pt-6 pb-8 mb-4 h-[20rem] w-[25rem] flex flex-col justify-center items-center"

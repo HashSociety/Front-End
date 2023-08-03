@@ -3,16 +3,18 @@ import logo from "../assets/hero.png";
 import homeimg from "../assets/Mask.png";
 import { useNavigate, Link } from "react-router-dom";
 import {useAtom}  from "jotai"
-import { stableAtom } from "../store";
+import { mapAtom } from "../store";
+
+
 
 function Home({ user }) {
+  const [mapData, setMapData] = useAtom(mapAtom);
 
   const [showTest, setShowTest] = useState(false);
 
   const scan = () =>{
     setShowTest((prevShowTest) => !prevShowTest);
   }
-  const [value, setValue] = useAtom(stableAtom)
 
   const navigate = useNavigate();
   const handleClick = () => {
@@ -38,7 +40,7 @@ function Home({ user }) {
         <div className="ml-[10%]  bg-black w-fit">
           Mesh Hawk is one tap solution which detects concealed mesh networks{" "}
           <br /> - reshaping cyber security htmlFor the better!!
-          <div className="flex flex-col absolute bg-black rounded-lg">
+           { user && <div className="flex flex-col absolute bg-black rounded-lg">
             <div className="flex gap-5 ml-5 mt-7 w-fit pl-2 pr-2 py-2 bg-[#2D2D2D] rounded">
               <button className="border py-1 px-6 bg-white text-black rounded" onClick={scan}>
                 Get Started
@@ -144,7 +146,7 @@ function Home({ user }) {
               </ul>
             </div>
             )}
-          </div>
+          </div>}
         </div>
         <div className="h-[60%] ">
           <img
