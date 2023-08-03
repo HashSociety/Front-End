@@ -22,7 +22,7 @@ const Logs = () => {
             A .pcap file has been downloaded and Updated -- you can analyze it in the next step.
           </div>
           <div className="mt-8">
-            happy hacking!!
+            happy hacking  	&gt;&gt;&gt;
           </div>
         </div>
       </div>
