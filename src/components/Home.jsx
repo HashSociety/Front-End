@@ -39,7 +39,7 @@ function Home({ user }) {
 
         <div className="ml-[10%]  bg-black w-fit">
           Mesh Hawk is one tap solution which detects concealed mesh networks{" "}
-          <br /> - reshaping cyber security htmlFor the better!!
+          <br /> - reshaping cyber security for the better!!
            { user && <div className="flex flex-col absolute bg-black rounded-lg">
             <div className="flex gap-5 ml-5 mt-7 w-fit pl-2 pr-2 py-2 bg-[#2D2D2D] rounded">
               <button className="border py-1 px-6 bg-white text-black rounded" onClick={scan}>

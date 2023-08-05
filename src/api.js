@@ -2,8 +2,10 @@ import axios from "axios";
 
 
 // GenerateGraph Pcap APi
+const url = "http://192.168.223.230:8000/"
+
 export const  getPcap = async () => {
-    const response = await fetch("http://127.0.0.1:8000");
+    const response = await fetch(url);
     return response.json();
   };
   export const FileUpload = async (file) => {
@@ -13,7 +15,7 @@ export const  getPcap = async () => {
     formData.append("pcapng_file", file);
   
     try {
-      const response = await axios.post("http://127.0.0.1:8000/upload/pcap", formData, {
+      const response = await axios.post(import.meta.env.VITE_BACKEND_URL + '/upload/pcap', formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -35,7 +37,7 @@ export const  getPcap = async () => {
     formData.append("file", file);
   
     try {
-      const response = await axios.post("http://127.0.0.1:8000/upload/csv", formData, {
+      const response = await axios.post(import.meta.env.VITE_BACKEND_URL + '/upload/csv', formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Corrected content type
         },

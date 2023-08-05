@@ -6,9 +6,10 @@ import { FileUpload, csvUpload } from "../api";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { mapAtom, csvAtom } from "../store";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { map } from "highcharts";
+import Loading from "./Loading"
 
 const Map = () => {
   const [file, setFile] = useState(null);
@@ -21,6 +22,7 @@ const Map = () => {
 
   const [csvFile, setCsvFile] = useState(null);
   const [csvName, setCsvName] = useState("Upload a csv file");
+  const navigate = useNavigate();
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -53,6 +55,7 @@ const Map = () => {
       const keys = Object.keys(componentsData);
       const parsedComponentsArray = keys.map((key) => componentsData[key]);
       setsecResponseMessage(parsedComponentsArray);
+      console.log(data.access_point);
 
       if (csvFile) {
         csvMutation.mutate(csvFile);
@@ -64,9 +67,9 @@ const Map = () => {
   return (
     <div className="h-screen ">
       {responseMessage ? (
-        <div className="flex flex-row justify-center items-center pt-10 gap-7 z-1 ">
+        <div className="flex flex-row justify-center items-center pt-10 gap-7 z-1 h-screen">
           {/* <div className="absolute w-[900px] h-[600px] bg-black bottom-10 left-5 rounded-2xl "></div> */}
-          <div className="mt-10 ml-10">
+          <div className="mt-10 ml-10 h-[80vh]" >
             <GenerateGraph
               keyVar={`maingraph`}
               pcap={responseMessage}
@@ -77,25 +80,38 @@ const Map = () => {
               }
             />
           </div>
-          <div className=" flex flex-col gap-5 justify-center items-center">
+          <div className=" flex flex-col gap-5 justify-center items-center ">
             {secresponseMessage.map((result, index) => (
-              <div key={index} className="relative">
+              <div key={index} className="relative ">
                 <GenerateGraph
                   keyVar={`component${index}`}
                   pcap={result}
                   graphHeight={250}
                   graphWidth={400}
                   className={
-                    "flex justify-center items-center bg-[#0F4C75] bg-opacity-20 border-2 border-[#323232]   rounded-2xl "
+                    "flex justify-center items-center bg-[#0F4C75] bg-opacity-20  border-[#323232] rounded-t-2xl "
                   }
                 />
+                <div className="flex justify-end bg-[#0F4C75] bg-opacity-20 rounded-b-2xl">
+                  <button
+                    className=" uppercase px-4 py-2 rounded-xl text-white bg-[#0F4C75] border border-gray-500 bg-opacity-20 rounded-b-2xl"
+                    onClick={() => {
+                      navigate("/protocol");
+                      console.log(
+                        `View Details button for component ${index} clicked.`
+                      );
+                    }}
+                  >
+                    More Details
+                  </button>
+                </div>
               </div>
             ))}
           </div>
         </div>
       ) : (
         <div className="flex justify-center  items-center text-[white] h-screen ">
-          <div className="w-[80%] px-[20%] py-[5%] flex flex-col justify-center items-center bg-[#161616] rounded-2xl">
+          <div className="w-[80%] px-[20%] py-[5%] flex flex-col justify-center items-center bg-[#161616] bg-opacity-80 rounded-2xl">
             <div className="w-[100%]">
               <fieldset className=" flex border py-3 pr-4 pl-4">
                 <legend className="text-[0.7rem]">
@@ -170,6 +186,12 @@ const Map = () => {
           </div>
         </div>
       )}
+
+      {componentMutation.isLoading || csvMutation.isLoading ? ( 
+        <div className="fixed inset-0 flex items-center justify-center bg-black z-50 bg-dotted-spacing-10 bg-dotted-gray-700 ">
+          <Loading />
+        </div>
+      ) : null}
     </div>
   );
 };
