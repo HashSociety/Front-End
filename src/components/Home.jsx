@@ -2,23 +2,35 @@ import React, { useState } from "react";
 import logo from "../assets/hero.png";
 import homeimg from "../assets/Mask.png";
 import { useNavigate, Link } from "react-router-dom";
-import {useAtom}  from "jotai"
+import { useAtom } from "jotai";
 import { mapAtom } from "../store";
-
-
+import { scanNetwork } from "../api";
+import { useMutation } from "@tanstack/react-query";
+import Loading from "./Loading";
+import { toast } from "react-toastify";
 
 function Home({ user }) {
   const [mapData, setMapData] = useAtom(mapAtom);
-
   const [showTest, setShowTest] = useState(false);
 
-  const scan = () =>{
-    setShowTest((prevShowTest) => !prevShowTest);
-  }
-
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/map");
+  const scanMutation = useMutation(scanNetwork, {
+    onSuccess: () => {
+      navigate("/map")
+    },
+  });
+
+  const scan = () => {
+    setShowTest((prevShowTest) => !prevShowTest);
+  };
+
+  const handleScan = () => {
+    if(!selectedValue) {
+      toast.error("please select duration")
+      return
+    }
+    scanMutation.mutate(selectedValue);
+    
   };
 
   const [selectedValue, setSelectedValue] = useState(null);
@@ -36,117 +48,145 @@ function Home({ user }) {
             NETWORKS
           </span>
         </div>
+        {/* <button onClick={() => scanNetwork(8)}>scan</button> */}
 
         <div className="ml-[10%]  bg-black w-fit">
           Mesh Hawk is one tap solution which detects concealed mesh networks{" "}
           <br /> - reshaping cyber security htmlFor the better!!
-           { user && <div className="flex flex-col absolute bg-black rounded-lg">
-            <div className="flex gap-5 ml-5 mt-7 w-fit pl-2 pr-2 py-2 bg-[#2D2D2D] rounded">
-              <button className="border py-1 px-6 bg-white text-black rounded" onClick={scan}>
-                Get Started
-              </button>
-              <button className="py-1 px-6  rounded">Learn More</button>
-            </div>
-            {user && (
-            <div className={`bg-black px-6 py-4 rounded-lg transition-all test  ${showTest ? "" : "hidden"}`} >
-              <div className="mt-4">Select your desired time of scan --</div>
-              <ul className="items-center  w-full text-sm font-medium rounded sm:flex bg-[#2D2D2D] border-[#2D2D2D] text-white mt-1">
-                <li
-                  className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 ${
-                    selectedValue === "15s" ? "selected" : ""
+          {user && (
+            <div className="flex flex-col absolute bg-black rounded-lg">
+              <div className="flex gap-5 ml-5 mt-7 w-fit pl-2 pr-2 py-2 bg-[#2D2D2D] rounded">
+                <button
+                  className="border py-1 px-6 bg-white text-black rounded"
+                  onClick={scan}
+                >
+                  Get Started
+                </button>
+                <button className="py-1 px-6  rounded">Learn More</button>
+              </div>
+              {user && (
+                <div
+                  className={`bg-black px-6 py-4 rounded-lg transition-all test  ${
+                    showTest ? "" : "hidden"
                   }`}
                 >
-                  <div className="flex items-center cursor-pointer">
-                    <input
-                      id="radio-15s"
-                      type="radio"
-                      value="15s"
-                      name="list-radio"
-                      className="w-4 h-4 hidden"
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="radio-15s" className=" px-10 cursor-pointer">
-                      15s
-                    </label>
+                  <div className="mt-4">
+                    Select your desired time of scan --
                   </div>
-                </li>
-
-                <li className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 cursor-pointer ${
-                    selectedValue === "15s" ? "selected" : ""
-                  }`}>
-                  <div className="flex items-center cursor-pointer">
-                    <input
-                      id="radio-30s"
-                      type="radio"
-                      value="30s"
-                      name="list-radio"
-                      className="w-4 h-4 hidden"
-                      onChange={handleRadioChange}
-                    />
-                    <label
-                      htmlFor="radio-30s"
-                      className=" px-10  cursor-pointer  "
+                  <ul className="items-center  w-full text-sm font-medium rounded sm:flex bg-[#2D2D2D] border-[#2D2D2D] text-white mt-1">
+                    <li
+                      className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 ${
+                        selectedValue === "15s" ? "selected" : ""
+                      }`}
                     >
-                      30s
-                    </label>
-                  </div>
-                </li>
+                      <div className="flex items-center cursor-pointer">
+                        <input
+                          id="radio-15s"
+                          type="radio"
+                          value={15}
+                          name="list-radio"
+                          className="w-4 h-4 hidden"
+                          onChange={handleRadioChange}
+                        />
+                        <label
+                          htmlFor="radio-15s"
+                          className=" px-10 cursor-pointer"
+                        >
+                          15s
+                        </label>
+                      </div>
+                    </li>
 
-                <li className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 cursor-pointer ${
-                    selectedValue === "45s" ? "selected" : ""
-                  }`}>
-                  <div className="flex items-center cursor-pointer">
-                    <input
-                      id="radio-60s"
-                      type="radio"
-                      value="45s"
-                      name="list-radio"
-                      className="w-4 h-4 hidden"
-                      onChange={handleRadioChange}
-                    />
-                    <label
-                      htmlFor="radio-60s"
-                      className=" px-10 cursor-pointer"
+                    <li
+                      className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 cursor-pointer ${
+                        selectedValue === "15s" ? "selected" : ""
+                      }`}
                     >
-                      45s
-                    </label>
-                  </div>
-                </li>
+                      <div className="flex items-center cursor-pointer">
+                        <input
+                          id="radio-30s"
+                          type="radio"
+                          value={30}
+                          name="list-radio"
+                          className="w-4 h-4 hidden"
+                          onChange={handleRadioChange}
+                        />
+                        <label
+                          htmlFor="radio-30s"
+                          className=" px-10  cursor-pointer  "
+                        >
+                          30s
+                        </label>
+                      </div>
+                    </li>
 
-                <li className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-1 cursor-pointer ${
-                    selectedValue === "60s" ? "selected" : ""
-                  }`}>
-                  <div className="flex items-center cursor-pointer">
-                    <input
-                      id="radio-120s"
-                      type="radio"
-                      value="60s"
-                      name="list-radio"
-                      className="w-4 h-4 hidden"
-                      onChange={handleRadioChange}
-                    />
-                    <label
-                      htmlFor="radio-120s"
-                      className="py-1 px-10  cursor-pointer "
+                    <li
+                      className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 cursor-pointer ${
+                        selectedValue === "45s" ? "selected" : ""
+                      }`}
                     >
-                      60s
-                    </label>
-                  </div>
-                </li>
+                      <div className="flex items-center cursor-pointer">
+                        <input
+                          id="radio-60s"
+                          type="radio"
+                          value= {45}
+                          name="list-radio"
+                          className="w-4 h-4 hidden"
+                          onChange={handleRadioChange}
+                        />
+                        <label
+                          htmlFor="radio-60s"
+                          className=" px-10 cursor-pointer"
+                        >
+                          45s
+                        </label>
+                      </div>
+                    </li>
 
-                <li
-                  className={`w-full border-b sm:border-b-0 py-3  px-5 ${
-                    selectedValue === "scan" ? "selected" : ""
-                  }`}
-                >
-                  <div className="flex items-center ">
-                    <button className="py-2 px-4 bg-secondary rounded  " onClick={handleClick}>{`Scan ${selectedValue || " "}`}</button>
-                  </div>
-                </li>
-              </ul>
+                    <li
+                      className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-1 cursor-pointer ${
+                        selectedValue === "60s" ? "selected" : ""
+                      }`}
+                    >
+                      <div className="flex items-center cursor-pointer">
+                        <input
+                          id="radio-120s"
+                          type="radio"
+                          value={60}
+                          name="list-radio"
+                          className="w-4 h-4 hidden"
+                          onChange={handleRadioChange}
+                        />
+                        <label
+                          htmlFor="radio-120s"
+                          className="py-1 px-10  cursor-pointer "
+                        >
+                          60s
+                        </label>
+                      </div>
+                    </li>
+
+                    <li
+                      className={`w-full border-b sm:border-b-0 py-3  px-5 ${
+                        selectedValue === "scan" ? "selected" : ""
+                      }`}
+                    >
+                      <div className="flex items-center ">
+                        {scanMutation.isLoading ? (
+                          <Loading />
+                        ) : (
+                          <button
+                            className="py-2 px-4 bg-secondary rounded  "
+                            onClick={handleScan}
+                          >{`Scan ${selectedValue || " "}`}</button>
+                        )}
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
-            )}
-          </div>}
+          )}
         </div>
         <div className="h-[60%] ">
           <img
