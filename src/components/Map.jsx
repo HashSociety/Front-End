@@ -9,7 +9,7 @@ import { mapAtom, csvAtom } from "../store";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { map } from "highcharts";
-import Loading from "./Loading"
+import Loading from "./Loading";
 
 const Map = () => {
   const [file, setFile] = useState(null);
@@ -55,7 +55,21 @@ const Map = () => {
       const keys = Object.keys(componentsData);
       const parsedComponentsArray = keys.map((key) => componentsData[key]);
       setsecResponseMessage(parsedComponentsArray);
-      console.log(data.access_point);
+      // console.log(data.compenents);
+
+      const lastElements = [];
+
+      if (data.compenents && typeof data.compenents === "object") {
+        for (const key in data.compenents) {
+          const components = data.compenents[key];
+          const lastComponent = components[components.length - 1];
+          if (lastComponent) {
+            lastElements.push(lastComponent);
+          }
+        }
+      }
+
+      console.log("Array of arrays:", lastElements);
 
       if (csvFile) {
         csvMutation.mutate(csvFile);
@@ -64,12 +78,23 @@ const Map = () => {
   });
   console.log("mapData", mapData, "csvData", csvData);
 
+  if (
+    csvData &&
+    csvData.first_section &&
+    Array.isArray(csvData.first_section)
+  ) {
+    const bssidArray = [];
+    csvData.first_section.forEach((element, index) => {
+      bssidArray.push(element.BSSID);
+    });
+    console.log("Array of element.BSSID values:", bssidArray);
+  }
   return (
-    <div className="h-screen ">
+    <div className="h-screen">
       {responseMessage ? (
-        <div className="flex flex-row justify-center items-center pt-10 gap-7 z-1 h-screen">
+        <div className="flex flex-row pt-10 gap-7 z-1 h-screen  ">
           {/* <div className="absolute w-[900px] h-[600px] bg-black bottom-10 left-5 rounded-2xl "></div> */}
-          <div className="mt-10 ml-10 h-[80vh]" >
+          <div className=" mt-10 ml-10 h-[80vh]">
             <GenerateGraph
               keyVar={`maingraph`}
               pcap={responseMessage}
@@ -80,7 +105,7 @@ const Map = () => {
               }
             />
           </div>
-          <div className=" flex flex-col gap-5 justify-center items-center ">
+          <div className="mt-10 flex-col overflow-scroll flex gap-4">
             {secresponseMessage.map((result, index) => (
               <div key={index} className="relative ">
                 <GenerateGraph
@@ -187,7 +212,7 @@ const Map = () => {
         </div>
       )}
 
-      {componentMutation.isLoading || csvMutation.isLoading ? ( 
+      {componentMutation.isLoading || csvMutation.isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center bg-black z-50 bg-dotted-spacing-10 bg-dotted-gray-700 ">
           <Loading />
         </div>
