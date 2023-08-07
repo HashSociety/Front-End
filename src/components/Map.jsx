@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import GenerateGraph from "./GenerateGraph";
 import { AiOutlineFileText } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
-import { FileUpload, csvUpload, getScannedPcap } from "../api";
+import { FileUpload, csvUpload, getScannedCsv, getScannedPcap } from "../api";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { mapAtom, csvAtom } from "../store";
@@ -84,19 +84,37 @@ const Map = () => {
       const responseBuffer = await data.arrayBuffer();
       const pcapBlob = new Blob([responseBuffer], { type: pcapHeaders.get('content-type') });
 
-      const pcapFile = new File([pcapBlob], 'your_file_name.pcap', {
+      const pcapFile = new File([pcapBlob], 'Scanned Pcap', {
         lastModified: new Date(pcapHeaders.get('last-modified')).getTime(),
         type: pcapHeaders.get('content-type'),
       });
       setFile(pcapFile);
     }
   })
+  const getCvsMutation= useMutation(getScannedCsv, {
+    onSuccess: async (data) => {
+
+      if(data.status == 200){
+        const pcapHeaders = data.headers;
+        const responseBuffer = await data.arrayBuffer();
+        const pcapBlob = new Blob([responseBuffer], { type: pcapHeaders.get('content-type') });
+        
+        const pcapFile = new File([pcapBlob], 'Scanned CSV', {
+          lastModified: new Date(pcapHeaders.get('last-modified')).getTime(),
+          type: pcapHeaders.get('content-type'),
+        });
+        setCsvFile(pcapFile);
+      }
+    }
+    
+  })
 
  useEffect(() => {
   getPcapMutation.mutate()
+  getCvsMutation.mutate()
  }, [])
- console.log(file)
 
+console.log(csvFile)
   if (
     csvData &&
     csvData.first_section &&
@@ -154,22 +172,38 @@ const Map = () => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center  items-center text-[white] h-screen ">
+        <div className="flex justify-center  items-center text-[white] h-screen">
           <div className="w-[80%] px-[20%] py-[5%] flex flex-col justify-center items-center bg-[#161616] bg-opacity-80 rounded-2xl">
-            <div className="w-[100%]">
-              <fieldset className=" flex border py-3 pr-4 pl-4">
+            <div className="w-[100%] gap-3 flex">
+              <fieldset className=" flex border py-3 pr-4 pl-4 w-full">
                 <legend className="text-[0.7rem]">
-                  Here is the .pcap file generated from previous step
+                  Generated Pcap
                 </legend>
                 <div className=" w-full flex justify-between items-center">
                   <div className="flex gap-2 justify-center items-center">
                     <AiOutlineFileText size={20} />
-                    {file && <span>{ file.name }</span>}
+                    {file && <span className=" text-blue-500 ">{ file.name }</span>}
                   </div>
-                  <div>
+                  {/* <div>
                     <RxCross1 />
-                  </div>
+                  </div> */}
                 </div>
+                
+              </fieldset>
+              <fieldset className=" flex border py-3 pr-4 pl-4 w-full">
+                <legend className="text-[0.7rem]">
+                  Generated CSV
+                </legend>
+                <div className=" w-full flex justify-between items-center">
+                  <div className="flex gap-2 justify-center items-center">
+                    <AiOutlineFileText size={20} />
+                    {csvFile && <span className=" text-blue-500 ">{ csvFile.name }</span>}
+                  </div>
+                  {/* <div>
+                    <RxCross1 />
+                  </div> */}
+                </div>
+                
               </fieldset>
             </div>
             <div className="mt-5 opacity-20">-----OR-----</div>

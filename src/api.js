@@ -114,3 +114,14 @@ export const getScannedPcap = async () => {
     throw error;
   }
 } 
+
+export const getScannedCsv = async () => {
+  try{
+    const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/get_file_csv")
+    return res
+  } catch (error) {
+    console.error('Error:', error);
+    return error
+    
+  }
+} 
