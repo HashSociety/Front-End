@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GenerateGraph from "./GenerateGraph";
 import { AiOutlineFileText } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
-import { FileUpload, csvUpload } from "../api";
-import { useMutation } from "@tanstack/react-query";
+import { FileUpload, csvUpload, getScannedPcap } from "../api";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { mapAtom, csvAtom } from "../store";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ const Map = () => {
   const [filename, setFilename] = useState("Upload a pcap file");
 
   const [responseMessage, setResponseMessage] = useState(null);
-  const [secresponseMessage, setsecResponseMessage] = useState(null);
+  const [secresponseMessage, setsecResponseMessage] = useState(null); 
   const [mapData, setMapData] = useAtom(mapAtom);
   const [csvData, setCsvData] = useAtom(csvAtom);
 
@@ -59,7 +59,26 @@ const Map = () => {
       }
     },
   });
-  console.log("mapData", mapData, "csvData", csvData);
+
+
+  const getPcapMutation= useMutation(getScannedPcap, {
+    onSuccess: async (data) => {
+      const pcapHeaders = data.headers;
+      const responseBuffer = await data.arrayBuffer();
+      const pcapBlob = new Blob([responseBuffer], { type: pcapHeaders.get('content-type') });
+
+      const pcapFile = new File([pcapBlob], 'your_file_name.pcap', {
+        lastModified: new Date(pcapHeaders.get('last-modified')).getTime(),
+        type: pcapHeaders.get('content-type'),
+      });
+      setFile(pcapFile);
+    }
+  })
+
+ useEffect(() => {
+  getPcapMutation.mutate()
+ }, [])
+ console.log(file)
 
   return (
     <div className="h-screen ">
@@ -104,7 +123,7 @@ const Map = () => {
                 <div className=" w-full flex justify-between items-center">
                   <div className="flex gap-2 justify-center items-center">
                     <AiOutlineFileText size={20} />
-                    <span>filename.pcap</span>
+                    {file && <span>{ file.name }</span>}
                   </div>
                   <div>
                     <RxCross1 />
