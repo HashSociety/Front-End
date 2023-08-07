@@ -12,13 +12,19 @@ import { toast } from "react-toastify";
 function Home({ user }) {
   const [mapData, setMapData] = useAtom(mapAtom);
   const [showTest, setShowTest] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(null);                             
 
   const navigate = useNavigate();
   const scanMutation = useMutation(scanNetwork, {
-    onSuccess: () => {
+    onSuccess: async() => {
+      sleep(selectedValue + 15) 
       navigate("/map")
     },
   });
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 
   const scan = () => {
     setShowTest((prevShowTest) => !prevShowTest);
@@ -33,7 +39,6 @@ function Home({ user }) {
     
   };
 
-  const [selectedValue, setSelectedValue] = useState(null);
 
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);

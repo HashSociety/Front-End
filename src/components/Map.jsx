@@ -99,11 +99,12 @@ const Map = () => {
         const responseBuffer = await data.arrayBuffer();
         const pcapBlob = new Blob([responseBuffer], { type: pcapHeaders.get('content-type') });
         
-        const pcapFile = new File([pcapBlob], 'Scanned CSV', {
+        const csvFile = new File([pcapBlob], 'Scanned CSV', {
           lastModified: new Date(pcapHeaders.get('last-modified')).getTime(),
           type: pcapHeaders.get('content-type'),
         });
-        setCsvFile(pcapFile);
+        setCsvFile(csvFile);
+        setCsvData(csvFile)
       }
     }
     
@@ -114,7 +115,7 @@ const Map = () => {
   getCvsMutation.mutate()
  }, [])
 
-console.log(csvFile)
+
   if (
     csvData &&
     csvData.first_section &&
