@@ -117,19 +117,22 @@ const Map = () => {
                     "flex justify-center items-center bg-[#0F4C75] bg-opacity-20  border-[#323232] rounded-t-2xl "
                   }
                 />
-                <div className="flex justify-end bg-[#0F4C75] bg-opacity-20 rounded-b-2xl">
-                  <button
-                    className=" uppercase px-4 py-2 rounded-xl text-white bg-[#0F4C75] border border-gray-500 bg-opacity-20 rounded-b-2xl"
-                    onClick={() => {
-                      navigate("/protocol");
-                      console.log(
-                        `View Details button for component ${index} clicked.`
-                      );
-                    }}
-                  >
-                    More Details
-                  </button>
-                </div>
+                  {csvData && (
+                    <div className="flex justify-end bg-[#0F4C75] bg-opacity-20 rounded-b-2xl">
+                    <button
+                      className=" uppercase px-4 py-2 rounded-xl text-white bg-[#0F4C75] border border-gray-500 bg-opacity-20 rounded-b-2xl"
+                      onClick={() => {
+                        navigate("/protocol");
+                        console.log(
+                          `View Details button for component ${index} clicked.`
+                        );
+                      }}
+                    >
+                      More Details
+                    </button>
+                  </div>
+                  )}
+                
               </div>
             ))}
           </div>
