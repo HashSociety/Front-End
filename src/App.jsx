@@ -8,7 +8,7 @@ import Protocol from "./components/Protocol";
 import Scanning from "./components/Scanning";
 import Login from "./components/Login";
 import { useLocation } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { getUser } from "./api";
 import Protected from "./components/Protected";
 import Logs from "./components/Logs";
@@ -21,9 +21,12 @@ const App = () => {
   const hideNavbarPaths = ["/login"];
   const [userId, setUserId] = useState(null);
   const token = localStorage.getItem("token");
-  const getUserId = useQuery(["user"], async () => getUser(token), {
-    enabled: !!token,
+  const getUserId = useMutation(async () => getUser(token), {
+    onError: () => {
+      setUserId(null)
+    }
   });
+  
   useEffect(() => {
     hideNavbarPaths.includes(location.pathname)
       ? setShouldHideNavbar(false)
@@ -33,8 +36,13 @@ const App = () => {
   useEffect(() => {
     if (localStorage.getItem("token") === null) return;
     getUserId.data && setUserId(getUserId.data.userid);
-  }, [getUserId.data]);
+  }, [getUserId]);
 
+  
+
+  useEffect(() => {
+    getUserId.mutate()
+  },[])
 
 
   return (
@@ -48,9 +56,9 @@ const App = () => {
         <Route
           path="/map"
           element={
-            <Protected user={userId}>
+            // <Protected user={userId}>
               <Map />
-            </Protected>
+            // </Protected>
           }
         />
         <Route
@@ -61,7 +69,7 @@ const App = () => {
             // </Protected>
           }
         />
-        <Route
+        <Route  
           path="/scan"
           element={
             // <Protected user={userId}>
