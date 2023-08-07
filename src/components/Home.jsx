@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../assets/hero.png";
-import homeimg from "../assets/Mask.png";
+import homeimg from "../assets/Mask1.png";
 import { useNavigate, Link } from "react-router-dom";
 import { useAtom } from "jotai";
 import { mapAtom } from "../store";
@@ -192,7 +192,7 @@ function Home({ user }) {
           <img
             src={homeimg}
             alt=""
-            className=" mt-20 w-full rounded-2xl object-cover h-[90%]"
+            className=" bg-black  mt-20 w-full rounded-2xl object-cover h-[90%]"
           />
         </div>
         <div className="mt-10">
