@@ -97,7 +97,7 @@ function Home({ user }) {
                           htmlFor="radio-15s"
                           className=" px-10 cursor-pointer"
                         >
-                          15s
+                          Quick
                         </label>
                       </div>
                     </li>
@@ -120,7 +120,7 @@ function Home({ user }) {
                           htmlFor="radio-30s"
                           className=" px-10  cursor-pointer  "
                         >
-                          30s
+                          Intermediate
                         </label>
                       </div>
                     </li>
@@ -143,12 +143,12 @@ function Home({ user }) {
                           htmlFor="radio-60s"
                           className=" px-10 cursor-pointer"
                         >
-                          45s
+                          Advanced
                         </label>
                       </div>
                     </li>
 
-                    <li
+                    {/* <li
                       className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-1 cursor-pointer ${
                         selectedValue === "60s" ? "selected" : ""
                       }`}
@@ -169,7 +169,7 @@ function Home({ user }) {
                           60s
                         </label>
                       </div>
-                    </li>
+                    </li> */}
 
                     <li
                       className={`w-full border-b sm:border-b-0 py-3  px-5 ${
@@ -183,7 +183,8 @@ function Home({ user }) {
                           <button
                             className="py-2 px-4 bg-secondary rounded  "
                             onClick={handleScan}
-                          >{`Scan ${selectedValue || " "}`}</button>
+                          >{`Scan
+                           `}</button>
                         )}
                       </div>
                     </li>
