@@ -31,6 +31,10 @@ const Map = () => {
       setFile(selectedFile);
     }
   };
+  console.log("mapData", mapData);
+  console.log("csvData", csvData);
+  console.log("file", file);
+  console.log("csvFile", csvFile);
 
   const handleCsvChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -84,7 +88,7 @@ const Map = () => {
       const responseBuffer = await data.arrayBuffer();
       const pcapBlob = new Blob([responseBuffer], { type: pcapHeaders.get('content-type') });
 
-      const pcapFile = new File([pcapBlob], 'Scanned Pcap', {
+      const pcapFile = new File([pcapBlob], 'scanned.pcap', {
         lastModified: new Date(pcapHeaders.get('last-modified')).getTime(),
         type: pcapHeaders.get('content-type'),
       });
@@ -99,12 +103,11 @@ const Map = () => {
         const responseBuffer = await data.arrayBuffer();
         const pcapBlob = new Blob([responseBuffer], { type: pcapHeaders.get('content-type') });
         
-        const csvFile = new File([pcapBlob], 'Scanned CSV', {
+        const csvFile = new File([pcapBlob], 'scanned.csv', {
           lastModified: new Date(pcapHeaders.get('last-modified')).getTime(),
-          type: pcapHeaders.get('content-type'),
+          type: "text/csv; charset=utf-8",
         });
         setCsvFile(csvFile);
-        setCsvData(csvFile)
       }
     }
     
