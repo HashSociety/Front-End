@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import GenerateGraph from "./GenerateGraph";
 import { AiOutlineFileText } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
@@ -10,7 +10,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { map } from "highcharts";
 import Loading from "./Loading";
-import PolarGraph from "./PolarGraph";
+import PolarGraph from "./PolarGraph"
+import  ComponentGraph from "./ComponentGraph";
 
 const Map = () => {
   const [file, setFile] = useState(null);
@@ -164,7 +165,7 @@ const Map = () => {
           <div className="mt-10 flex-row flex-wrap justify-center flex gap-4">
             {secresponseMessage.map((result, index) => (
               <div key={index} className="relative ">
-                <GenerateGraph
+                <ComponentGraph
                   keyVar={`component${index}`}
                   pcap={result}
                   graphHeight={250}

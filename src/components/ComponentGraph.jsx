@@ -22,17 +22,11 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,cla
   console.log(keyVar, pcap)
   
   // Update the logic for creating nodes from the pcap array of size 4
-  pcap.forEach((arr) => {
+  pcap.forEach((arr, index) => {
+    if(index < pcap.length - 1)
     nodes.push([arr[0], arr[1]]);
     // nodes.push([arr[2], arr[3]]);
   });
-  
-  // pcap.forEach((el, index) => el.forEach((res, i) => (i < el.length - 2 ) && nodes.push([res, el[i+1]])))
-  console.log(nodes)
-  
-  
-
-  
 
   useEffect(() => {
     (function (H) {
