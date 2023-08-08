@@ -12,33 +12,31 @@ import { toast } from "react-toastify";
 function Home({ user }) {
   const [mapData, setMapData] = useAtom(mapAtom);
   const [showTest, setShowTest] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(null);                             
+  const [selectedValue, setSelectedValue] = useState(null);
 
   const navigate = useNavigate();
   const scanMutation = useMutation(scanNetwork, {
-    onSuccess: async() => {
-      sleep(selectedValue + 15) 
-      navigate("/map")
+    onSuccess: async () => {
+  
+      await new Promise(r => setTimeout(r,(selectedValue + 15)*1000 ));
+      navigate("/map");
     },
   });
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
+  async function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
   const scan = () => {
     setShowTest((prevShowTest) => !prevShowTest);
   };
 
   const handleScan = () => {
-    if(!selectedValue) {
-      toast.error("please select duration")
-      return
+    if (!selectedValue) {
+      toast.error("please select duration");
+      return;
     }
     scanMutation.mutate(selectedValue);
-    
   };
-
 
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);
@@ -81,10 +79,12 @@ function Home({ user }) {
                   <ul className="items-center  w-full text-sm font-medium rounded sm:flex text-white mt-1 gap-2">
                     <li
                       className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-blue-500 border-[1px] ${
-                        selectedValue === 15 ? "text-white bg-blue-500 " : "  bg-blue-500/20 text-blue-600   hover:bg-blue-500 hover:text-white"
+                        selectedValue === 15
+                          ? "text-white bg-blue-500 "
+                          : "  bg-blue-500/20 text-blue-600   hover:bg-blue-500 hover:text-white"
                       }`}
+                      onClick={() => setSelectedValue(15)}
                     >
-
                       <div className="flex items-center cursor-pointer">
                         <input
                           id="radio-15s"
@@ -93,7 +93,6 @@ function Home({ user }) {
                           name="list-radio"
                           className="w-4 h-4 hidden "
                           // onChange={handleRadioChange}
-                          onClick={() => setSelectedValue(15)}
                         />
                         <label
                           htmlFor="radio-15s"
@@ -106,8 +105,11 @@ function Home({ user }) {
 
                     <li
                       className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-purple-500 border-[1px] ${
-                        selectedValue === 30 ? "text-white bg-purple-500 " : "  bg-purple-500/20 text-purple-600   hover:bg-purple-500 hover:text-white"
+                        selectedValue === 30
+                          ? "text-white bg-purple-500 "
+                          : "  bg-purple-500/20 text-purple-600   hover:bg-purple-500 hover:text-white"
                       }`}
+                      onClick={() => setSelectedValue(30)}
                     >
                       <div className="flex items-center cursor-pointer">
                         <input
@@ -117,7 +119,6 @@ function Home({ user }) {
                           name="list-radio"
                           className="w-4 h-4 hidden"
                           // onChange={handleRadioChange}
-                          onClick={() => setSelectedValue(30)}
                         />
                         <label
                           htmlFor="radio-30s"
@@ -130,17 +131,19 @@ function Home({ user }) {
 
                     <li
                       className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-teal-500 border-[1px] ${
-                        selectedValue === 45 ? "text-white bg-teal-500 " : "  bg-teal-500/20 text-teal-600   hover:bg-teal-500 hover:text-white"
+                        selectedValue === 45
+                          ? "text-white bg-teal-500 "
+                          : "  bg-teal-500/20 text-teal-600   hover:bg-teal-500 hover:text-white"
                       }`}
+                      onChange={() => setSelectedValue(45)}
                     >
                       <div className="flex items-center cursor-pointer">
                         <input
                           id="radio-60s"
                           type="radio"
-                          value= {45}
+                          value={45}
                           name="list-radio"
                           className="w-4 h-4 hidden"
-                          onChange={() => setSelectedValue(45)}
                         />
                         <label
                           htmlFor="radio-60s"
@@ -150,8 +153,6 @@ function Home({ user }) {
                         </label>
                       </div>
                     </li>
-
-              
 
                     <li
                       className={`w-full border-b sm:border-b-0 py-3  px- ${
@@ -165,7 +166,9 @@ function Home({ user }) {
                           <button
                             className="py-2 px-6 bg-secondary rounded  font-bold  "
                             onClick={handleScan}
-                          >Scan</button>
+                          >
+                            Scan
+                          </button>
                         )}
                       </div>
                     </li>

@@ -20,13 +20,23 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,cla
   const nodes = []; 
   
 
-  
+  console.log(nodes)
   // Update the logic for creating nodes from the pcap array of size 4
-  pcap.forEach((arr, index) => {
-    if(index < pcap.length - 1)
-    nodes.push([arr[0], arr[1]]);
-    // nodes.push([arr[2], arr[3]]);
-  });
+  for (const key in pcap) {
+    if(key == "component_edges"){
+        pcap[key].forEach((arr) => {
+            if(arr.length > 1){
+                nodes.push([arr[0], arr[1]]);
+            }
+        })
+    }
+    
+    // if (component.component_edges.length > 2) {
+    //   for (let i = 0; i < component.component_edges.length - 1; i++) {
+    //     nodes.push(component.component_edges[i]);
+    //   }
+    // }
+  }
 
   useEffect(() => {
     (function (H) {
