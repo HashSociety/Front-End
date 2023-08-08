@@ -17,6 +17,8 @@
 *,
 *::before,
 *::after {
+  
+  padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
 }
@@ -24,7 +26,7 @@
 
 
 body {
-  @apply bg-primary text-[white] bg-dotted-spacing-10 bg-dotted-gray-700;
+  @apply bg-primary text-[white] bg-dotted-spacing-10 bg-dotted-gray-700 ;
 }
 
 

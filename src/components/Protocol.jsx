@@ -2,12 +2,16 @@ import mesh from "../assets/kavach.png";
 import logo from "../assets/logo-bg.png";
 import { GiOverkill } from "react-icons/gi";
 import { BiDownload } from "react-icons/bi";
-import { mapAtom, csvAtom } from "../store";
+import { mapAtom, csvAtom, selectedCompAtom } from "../store";
 import { useAtom } from "jotai";
 
 const Prototype = () => {
   const [mapData, setMapData] = useAtom(mapAtom);
   const [csvData, setCsvData] = useAtom(csvAtom);
+  const [selected , setSelected] = useAtom(selectedCompAtom)
+
+  console.log("selected", selected[selected.length - 1][0])
+  
   console.log(csvData.first_section[0].BSSID);
   console.log(csvData.first_section[0].ESSID);
   return (
@@ -66,7 +70,7 @@ const Prototype = () => {
             <p className="tex-1xl">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Assumenda, iste!
-            </p>
+            </p>  
           </div>
           <div className="flex flex-col p-3 border  border-gray-500 h-fit rounded-2xl  text-white ">
             <div className="flex flex-col items-center justify-between">

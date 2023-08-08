@@ -6,7 +6,7 @@ import Loading from "./Loading";
 function Navbar({ user , userStatus }) {
 
   return (
-    <nav className="py-5 flex justify-between h-[10%] items-center absolute w-full z-50">
+    <nav className="py-5 flex justify-between h-[10%] items-center  w-full z-50">
       <div className="flex items-center">
         <Link to="/" className="text-2xl font-bold flex items-center logo">
           <img src={Kavach} alt="" className="w-[15%]" />

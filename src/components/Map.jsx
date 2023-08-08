@@ -5,11 +5,12 @@ import { RxCross1 } from "react-icons/rx";
 import { FileUpload, csvUpload, getScannedCsv, getScannedPcap } from "../api";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
-import { mapAtom, csvAtom } from "../store";
+import { mapAtom, csvAtom, selectedCompAtom } from "../store";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { map } from "highcharts";
 import Loading from "./Loading";
+import PolarGraph from "./PolarGraph"
 
 const Map = () => {
   const [file, setFile] = useState(null);
@@ -19,9 +20,14 @@ const Map = () => {
   const [secresponseMessage, setsecResponseMessage] = useState(null); 
   const [mapData, setMapData] = useAtom(mapAtom);
   const [csvData, setCsvData] = useAtom(csvAtom);
+  const [selected , setSelected] = useAtom(selectedCompAtom)
+
 
   const [csvFile, setCsvFile] = useState(null);
   const [csvName, setCsvName] = useState("Upload a csv file");
+
+  const bssidArray = [];
+    const power = [];
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
@@ -124,18 +130,28 @@ const Map = () => {
     csvData.first_section &&
     Array.isArray(csvData.first_section)
   ) {
-    const bssidArray = [];
+    
     csvData.first_section.forEach((element, index) => {
+      
       bssidArray.push(element.BSSID);
+      power.push(element.Power);
+
+      if (!isNaN(element.Power)) {
+        power.push(element.Power);
+      }
     });
     console.log("Array of element.BSSID values:", bssidArray);
+    console.log("Array of element.Power values:", power);
   }
+
+  
   return (
-    <div className="h-screen">
+    <div className="h-screen over">
       {responseMessage ? (
-        <div className="flex flex-row pt-10 gap-7 z-1 h-screen  ">
+        <div className="flex flex-col  gap-7 z-1 h-screen  ">
           {/* <div className="absolute w-[900px] h-[600px] bg-black bottom-10 left-5 rounded-2xl "></div> */}
-          <div className=" mt-10 ml-10 h-[80vh]">
+          <div className="flex gap-10">
+          <div className=" mt-10 h-[80vh]">
             <GenerateGraph
               keyVar={`maingraph`}
               pcap={responseMessage}
@@ -146,7 +162,11 @@ const Map = () => {
               }
             />
           </div>
-          <div className="mt-10 flex-col overflow-scroll flex gap-4">
+          <div className="max-w-[100%] mt-10">
+             <PolarGraph bssidArray={bssidArray} power={power}/>
+          </div>
+          </div>
+          <div className="mt-10 flex-row flex-wrap flex gap-4">
             {secresponseMessage.map((result, index) => (
               <div key={index} className="relative ">
                 <GenerateGraph
@@ -163,10 +183,9 @@ const Map = () => {
                     <button
                       className=" uppercase px-4 py-2 rounded-xl text-white bg-[#0F4C75] border border-gray-500 bg-opacity-20 rounded-b-2xl"
                       onClick={() => {
+                        setSelected(result)
                         navigate("/protocol");
-                        console.log(
-                          `View Details button for component ${index} clicked.`
-                        );
+                        
                       }}
                     >
                       More Details

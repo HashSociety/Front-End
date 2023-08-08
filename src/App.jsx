@@ -14,6 +14,8 @@ import Protected from "./components/Protected";
 import Logs from "./components/Logs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PolarGraph from "./components/PolarGraph";
+import { useAtom } from "jotai";
 
 const App = () => {
   const [shouldHideNavbar, setShouldHideNavbar] = useState(false);
@@ -46,7 +48,7 @@ const App = () => {
 
 
   return (
-    <div className="max-w-[90%] h-screen block mx-auto relative ">
+    <div className="max-w-[90%]  h-screen block mx-auto relative ">
       {shouldHideNavbar && (
         <Navbar user={userId} userStatus={getUserId.status} />
       )}
@@ -80,6 +82,7 @@ const App = () => {
 
         <Route path="/logs" element={<Logs />} />
         <Route path="/login" element={<Login />} />
+        {/* <Route path="/polar" element={<PolarGraph/> }/> */}
       </Routes>
     
       <ToastContainer
