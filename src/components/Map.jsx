@@ -18,17 +18,16 @@ const Map = () => {
   const [filename, setFilename] = useState("Upload a pcap file");
 
   const [responseMessage, setResponseMessage] = useState(null);
-  const [secresponseMessage, setsecResponseMessage] = useState(null); 
+  const [secresponseMessage, setsecResponseMessage] = useState(null);
   const [mapData, setMapData] = useAtom(mapAtom);
   const [csvData, setCsvData] = useAtom(csvAtom);
-  const [selected , setSelected] = useAtom(selectedCompAtom)
-
+  const [selected, setSelected] = useAtom(selectedCompAtom);
 
   const [csvFile, setCsvFile] = useState(null);
   const [csvName, setCsvName] = useState("Upload a csv file");
 
   const bssidArray = [];
-    const power = [];
+  const power = [];
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
@@ -66,19 +65,18 @@ const Map = () => {
       setsecResponseMessage(parsedComponentsArray);
 
 
-      const lastElements = [];
+      const lastElementsArray = [];
 
-      // if (data.compenents && typeof data.compenents === "object") {
-      //   for (const key in data.compenents) {
-      //     const components = data.compenents[key];
-      //     const lastComponent = components[components.length - 1];
-      //     if (lastComponent) {
-      //       lastElements.push(lastComponent);
-      //     }
-      //   }
-      // }
-
-      console.log("Array of arrays:", lastElements);
+      for (const key in data.compenents) {
+        const subArrays = data.compenents[key];
+        const lastSubArray = subArrays[subArrays.length];
+        if (lastSubArray) {
+          const lastElement = lastSubArray[lastSubArray.length - 1];
+          lastElementsArray.push(lastElement);
+        }
+      }
+      
+      console.log(lastElementsArray);
 
       if (csvFile) {
         csvMutation.mutate(csvFile);
@@ -86,24 +84,24 @@ const Map = () => {
     },
   });
 
-
-  const getPcapMutation= useMutation(getScannedPcap, {
+  const getPcapMutation = useMutation(getScannedPcap, {
     onSuccess: async (data) => {
       const pcapHeaders = data.headers;
       const responseBuffer = await data.arrayBuffer();
-      const pcapBlob = new Blob([responseBuffer], { type: pcapHeaders.get('content-type') });
+      const pcapBlob = new Blob([responseBuffer], {
+        type: pcapHeaders.get("content-type"),
+      });
 
       const pcapFile = new File([pcapBlob], pcapHeaders.get('last-modified'), {
         lastModified: new Date(pcapHeaders.get('last-modified')).getTime(),
         type: pcapHeaders.get('content-type'),
       });
       setFile(pcapFile);
-    }
-  })
-  const getCvsMutation= useMutation(getScannedCsv, {
+    },
+  });
+  const getCvsMutation = useMutation(getScannedCsv, {
     onSuccess: async (data) => {
-
-      if(data.status == 200){
+      if (data.status == 200) {
         const pcapHeaders = data.headers;
         const responseBuffer = await data.arrayBuffer();
         const pcapBlob = new Blob([responseBuffer], { type: pcapHeaders.get('content-type') });
@@ -114,25 +112,20 @@ const Map = () => {
         });
         setCsvFile(csvFile);
       }
-    }
-    
-  })
+    },
+  });
 
- useEffect(() => {
-  getPcapMutation.mutate()
-  getCvsMutation.mutate()
- }, [])
+  useEffect(() => {
+    getPcapMutation.mutate();
+    getCvsMutation.mutate();
+  }, []);
 
-
- 
   if (
     csvData &&
     csvData.first_section &&
     Array.isArray(csvData.first_section)
   ) {
-    
     csvData.first_section.forEach((element, index) => {
-      
       bssidArray.push(element.BSSID);
       power.push(element.Power);
 
@@ -142,27 +135,26 @@ const Map = () => {
     });
   }
 
-  
   return (
     <div className="h-screen over">
       {responseMessage ? (
         <div className="flex flex-col  gap-7 z-1 h-screen  ">
           {/* <div className="absolute w-[900px] h-[600px] bg-black bottom-10 left-5 rounded-2xl "></div> */}
           <div className="flex gap-3">
-          <div className=" mt-10 h-[80vh]">
-            <GenerateGraph
-              keyVar={`maingraph`}
-              pcap={responseMessage}
-              graphHeight={600}
-              graphWidth={900}
-              className={
-                "flex justify-center items-center bg-[#0F4C75] bg-opacity-20 border-2 border-[#323232]  rounded-2xl "
-              }
-            />
-          </div>
-          <div className="max-w-[100%] mt-10">
-             <PolarGraph/>
-          </div>
+            <div className=" mt-10 h-[80vh]">
+              <GenerateGraph
+                keyVar={`maingraph`}
+                pcap={responseMessage}
+                graphHeight={600}
+                graphWidth={900}
+                className={
+                  "flex justify-center items-center bg-[#0F4C75] bg-opacity-20 border-2 border-[#323232]  rounded-2xl "
+                }
+              />
+            </div>
+            <div className="max-w-[100%] mt-10">
+              <PolarGraph />
+            </div>
           </div>
           <div className="mt-10 flex-row flex-wrap justify-center flex gap-4">
             {secresponseMessage.map((result, index) => (
@@ -176,21 +168,19 @@ const Map = () => {
                     "flex justify-center items-center bg-[#0F4C75] bg-opacity-20  border-[#323232] rounded-t-2xl "
                   }
                 />
-                  {csvData && (
-                    <div className="flex justify-end bg-[#0F4C75] bg-opacity-20 rounded-b-2xl">
+                {csvData && (
+                  <div className="flex justify-end bg-[#0F4C75] bg-opacity-20 rounded-b-2xl">
                     <button
                       className=" uppercase px-4 py-2 rounded-xl text-white bg-[#0F4C75] border border-gray-500 bg-opacity-20 rounded-b-2xl"
                       onClick={() => {
-                        setSelected(result)
+                        setSelected(result);
                         navigate("/protocol");
-                        
                       }}
                     >
                       More Details
                     </button>
                   </div>
-                  )}
-                
+                )}
               </div>
             ))}
           </div>
@@ -200,34 +190,32 @@ const Map = () => {
           <div className="w-[80%] px-[20%] py-[5%] flex flex-col justify-center items-center bg-[#161616] bg-opacity-80 rounded-2xl">
             <div className="w-[100%] gap-3 flex">
               <fieldset className=" flex border py-3 pr-4 pl-4 w-full">
-                <legend className="text-[0.7rem]">
-                  Generated Pcap
-                </legend>
+                <legend className="text-[0.7rem]">Generated Pcap</legend>
                 <div className=" w-full flex justify-between items-center">
                   <div className="flex gap-2 justify-center items-center">
                     <AiOutlineFileText size={20} />
-                    {file && <span className=" text-blue-500 ">{ file.name }</span>}
+                    {file && (
+                      <span className=" text-blue-500 ">{file.name}</span>
+                    )}
                   </div>
                   {/* <div>
                     <RxCross1 />
                   </div> */}
                 </div>
-                
               </fieldset>
               <fieldset className=" flex border py-3 pr-4 pl-4 w-full">
-                <legend className="text-[0.7rem]">
-                  Generated CSV
-                </legend>
+                <legend className="text-[0.7rem]">Generated CSV</legend>
                 <div className=" w-full flex justify-between items-center">
                   <div className="flex gap-2 justify-center items-center">
                     <AiOutlineFileText size={20} />
-                    {csvFile && <span className=" text-blue-500 ">{ csvFile.name }</span>}
+                    {csvFile && (
+                      <span className=" text-blue-500 ">{csvFile.name}</span>
+                    )}
                   </div>
                   {/* <div>
                     <RxCross1 />
                   </div> */}
                 </div>
-                
               </fieldset>
             </div>
             <div className="mt-5 opacity-20">-----OR-----</div>

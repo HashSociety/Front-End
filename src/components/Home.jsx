@@ -124,7 +124,7 @@ function Home({ user }) {
                           htmlFor="radio-30s"
                           className=" px-10  cursor-pointer  "
                         >
-                          Intermidiate
+                          Intermediate
                         </label>
                       </div>
                     </li>

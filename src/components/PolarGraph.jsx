@@ -8,11 +8,11 @@ HighchartsMore(Highcharts);
 export default function PolarChart({}) {
   useEffect(() => {
     const idArray = [
-      "B0:52:16:5B:D9:4D",
-      "C2:C7:36:64:A1:6D",
-      "8E:E5:8A:FD:7D:09",
+      "E2:21:A9:B4:3D:A4",
+      "OE:CE:D0:9F:11:2B",
+      "2A:58:36:36:0F:C5",
       "1E:C1:0C:44:B6:D2",
-      "06:82:3D:43:43:C1",
+      "8E:4D:36:A6:78:61",
       "1A:7B:33:BF:B8:02",
       "06:82:3D:43:47:39",
       "EA:48:B8:14:A8:C6",
