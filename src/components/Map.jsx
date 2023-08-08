@@ -38,10 +38,8 @@ const Map = () => {
       setFile(selectedFile);
     }
   };
-  console.log("mapData", mapData);
-  console.log("csvData", csvData);
-  console.log("file", file);
-  console.log("csvFile", csvFile);
+  console.log("mapAtom", mapData);
+  console.log("csvAtom", csvData);
 
   const handleCsvChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -66,7 +64,7 @@ const Map = () => {
       const keys = Object.keys(componentsData);
       const parsedComponentsArray = keys.map((key) => componentsData[key]);
       setsecResponseMessage(parsedComponentsArray);
-      // console.log(data.compenents);
+
 
       const lastElements = [];
 
@@ -95,7 +93,7 @@ const Map = () => {
       const responseBuffer = await data.arrayBuffer();
       const pcapBlob = new Blob([responseBuffer], { type: pcapHeaders.get('content-type') });
 
-      const pcapFile = new File([pcapBlob], 'scanned.pcap', {
+      const pcapFile = new File([pcapBlob], pcapHeaders.get('last-modified'), {
         lastModified: new Date(pcapHeaders.get('last-modified')).getTime(),
         type: pcapHeaders.get('content-type'),
       });
@@ -110,7 +108,7 @@ const Map = () => {
         const responseBuffer = await data.arrayBuffer();
         const pcapBlob = new Blob([responseBuffer], { type: pcapHeaders.get('content-type') });
         
-        const csvFile = new File([pcapBlob], 'scanned.csv', {
+        const csvFile = new File([pcapBlob], pcapHeaders.get('last-modified') , {
           lastModified: new Date(pcapHeaders.get('last-modified')).getTime(),
           type: "text/csv; charset=utf-8",
         });
@@ -142,8 +140,6 @@ const Map = () => {
         power.push(element.Power);
       }
     });
-    console.log("Array of element.BSSID values:", bssidArray);
-    console.log("Array of element.Power values:", power);
   }
 
   
