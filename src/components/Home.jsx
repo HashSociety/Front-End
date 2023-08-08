@@ -59,7 +59,7 @@ function Home({ user }) {
           Mesh Hawk is one tap solution which detects concealed mesh networks{" "}
           <br /> - reshaping cyber security htmlFor the better!!
           {user && (
-            <div className="flex flex-col absolute bg-black rounded-lg">
+            <div className="flex flex-col absolute bg-black rounded-lg ">
               <div className="flex gap-5 ml-5 mt-7 w-fit pl-2 pr-2 py-2 bg-[#2D2D2D] rounded">
                 <button
                   className="border py-1 px-6 bg-white text-black rounded"
@@ -78,20 +78,22 @@ function Home({ user }) {
                   <div className="mt-4">
                     Select your desired time of scan --
                   </div>
-                  <ul className="items-center  w-full text-sm font-medium rounded sm:flex bg-[#2D2D2D] border-[#2D2D2D] text-white mt-1">
+                  <ul className="items-center  w-full text-sm font-medium rounded sm:flex text-white mt-1 gap-2">
                     <li
-                      className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 ${
-                        selectedValue === "15s" ? "selected" : ""
+                      className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-blue-500 border-[1px] ${
+                        selectedValue === 15 ? "text-white bg-blue-500 " : "  bg-blue-500/20 text-blue-600   hover:bg-blue-500 hover:text-white"
                       }`}
                     >
+
                       <div className="flex items-center cursor-pointer">
                         <input
                           id="radio-15s"
                           type="radio"
                           value={15}
                           name="list-radio"
-                          className="w-4 h-4 hidden"
-                          onChange={handleRadioChange}
+                          className="w-4 h-4 hidden "
+                          // onChange={handleRadioChange}
+                          onClick={() => setSelectedValue(15)}
                         />
                         <label
                           htmlFor="radio-15s"
@@ -103,8 +105,8 @@ function Home({ user }) {
                     </li>
 
                     <li
-                      className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 cursor-pointer ${
-                        selectedValue === "15s" ? "selected" : ""
+                      className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-purple-500 border-[1px] ${
+                        selectedValue === 30 ? "text-white bg-purple-500 " : "  bg-purple-500/20 text-purple-600   hover:bg-purple-500 hover:text-white"
                       }`}
                     >
                       <div className="flex items-center cursor-pointer">
@@ -114,7 +116,8 @@ function Home({ user }) {
                           value={30}
                           name="list-radio"
                           className="w-4 h-4 hidden"
-                          onChange={handleRadioChange}
+                          // onChange={handleRadioChange}
+                          onClick={() => setSelectedValue(30)}
                         />
                         <label
                           htmlFor="radio-30s"
@@ -126,8 +129,8 @@ function Home({ user }) {
                     </li>
 
                     <li
-                      className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-2 cursor-pointer ${
-                        selectedValue === "45s" ? "selected" : ""
+                      className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-teal-500 border-[1px] ${
+                        selectedValue === 45 ? "text-white bg-teal-500 " : "  bg-teal-500/20 text-teal-600   hover:bg-teal-500 hover:text-white"
                       }`}
                     >
                       <div className="flex items-center cursor-pointer">
@@ -137,7 +140,7 @@ function Home({ user }) {
                           value= {45}
                           name="list-radio"
                           className="w-4 h-4 hidden"
-                          onChange={handleRadioChange}
+                          onChange={() => setSelectedValue(45)}
                         />
                         <label
                           htmlFor="radio-60s"
@@ -148,31 +151,10 @@ function Home({ user }) {
                       </div>
                     </li>
 
-                    {/* <li
-                      className={`w-full border-b  sm:border-b-0 sm:border-r border-gray-600 px-3 py-1 cursor-pointer ${
-                        selectedValue === "60s" ? "selected" : ""
-                      }`}
-                    >
-                      <div className="flex items-center cursor-pointer">
-                        <input
-                          id="radio-120s"
-                          type="radio"
-                          value={60}
-                          name="list-radio"
-                          className="w-4 h-4 hidden"
-                          onChange={handleRadioChange}
-                        />
-                        <label
-                          htmlFor="radio-120s"
-                          className="py-1 px-10  cursor-pointer "
-                        >
-                          60s
-                        </label>
-                      </div>
-                    </li> */}
+              
 
                     <li
-                      className={`w-full border-b sm:border-b-0 py-3  px-5 ${
+                      className={`w-full border-b sm:border-b-0 py-3  px- ${
                         selectedValue === "scan" ? "selected" : ""
                       }`}
                     >
@@ -181,10 +163,9 @@ function Home({ user }) {
                           <Loading />
                         ) : (
                           <button
-                            className="py-2 px-4 bg-secondary rounded  "
+                            className="py-2 px-6 bg-secondary rounded  font-bold  "
                             onClick={handleScan}
-                          >{`Scan
-                           `}</button>
+                          >Scan</button>
                         )}
                       </div>
                     </li>

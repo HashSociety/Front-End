@@ -12,14 +12,14 @@ HighchartsExporting(Highcharts);
 
 export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,className}) {
   const queryClient = useQueryClient();
-// console.log(classNameVar )
+
   const url = import.meta.env.VITE_BACKEND_URL;
 
   const { data, isLoading, isError, height, width } = useQuery(['getpcap'], getPcap);
 
   const nodes = []; 
   
-  console.log(keyVar, pcap)
+
   
   // Update the logic for creating nodes from the pcap array of size 4
   pcap.forEach((arr, index) => {
