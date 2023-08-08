@@ -15,13 +15,14 @@ export default function PolarChart({}) {
       "06:82:3D:43:43:C1",
       "1A:7B:33:BF:B8:02",
       "06:82:3D:43:47:39",
+      "EA:48:B8:14:A8:C6",
       "06:82:3D:43:6B:E7",
       "06:82:3D:43:65:09",
       "06:82:3D:43:42:9B",
       "C4:6E:1F:63:3D:12",
       "3A:AF:C5:78:57:8B",
     ];
-    const pointsArray = [52, 45, 38, 43, 47, 51, 42, 48, 40, 37, 31, 19, 1];
+    const pointsArray = [52, 45, 38, 65, 47, 51, 42, 48, 40, 37, 31, 19, 1];
 
     const chartOptions = {
       chart: {
@@ -91,7 +92,7 @@ export default function PolarChart({}) {
   return (
     <div
       id="polar"
-      className="flex justify-center items-center h-[80%] w-[100%] border rounded-lg bg-[#0F4C75] bg-opacity-20"
+      className="flex justify-center items-center h-[80%] w-[90%] border rounded-lg bg-[#0F4C75] bg-opacity-20"
     >
       <HighchartsReact highcharts={Highcharts} options={{}} />
     </div>

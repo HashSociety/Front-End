@@ -151,7 +151,7 @@ const Map = () => {
       {responseMessage ? (
         <div className="flex flex-col  gap-7 z-1 h-screen  ">
           {/* <div className="absolute w-[900px] h-[600px] bg-black bottom-10 left-5 rounded-2xl "></div> */}
-          <div className="flex gap-10">
+          <div className="flex gap-3">
           <div className=" mt-10 h-[80vh]">
             <GenerateGraph
               keyVar={`maingraph`}
@@ -167,7 +167,7 @@ const Map = () => {
              <PolarGraph/>
           </div>
           </div>
-          <div className="mt-10 flex-row flex-wrap flex gap-4">
+          <div className="mt-10 flex-row flex-wrap justify-center flex gap-4">
             {secresponseMessage.map((result, index) => (
               <div key={index} className="relative ">
                 <GenerateGraph
