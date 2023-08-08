@@ -5,14 +5,24 @@ import HighchartsMore from "highcharts/highcharts-more";
 
 HighchartsMore(Highcharts);
 
-export default function PolarChart({ bssidArray, power }) {
+export default function PolarChart({}) {
   useEffect(() => {
-    const filteredPower = power
-      .filter((value) => !isNaN(value))
-      .map((value) => Math.abs(value));
+    const idArray = [
+      "B0:52:16:5B:D9:4D",
+      "C2:C7:36:64:A1:6D",
+      "8E:E5:8A:FD:7D:09",
+      "1E:C1:0C:44:B6:D2",
+      "06:82:3D:43:43:C1",
+      "1A:7B:33:BF:B8:02",
+      "06:82:3D:43:47:39",
+      "06:82:3D:43:6B:E7",
+      "06:82:3D:43:65:09",
+      "06:82:3D:43:42:9B",
+      "C4:6E:1F:63:3D:12",
+      "3A:AF:C5:78:57:8B",
+    ];
+    const pointsArray = [52, 45, 38, 43, 47, 51, 42, 48, 40, 37, 31, 19, 1];
 
-    console.log(bssidArray);
-    console.log(filteredPower);
     const chartOptions = {
       chart: {
         polar: true,
@@ -36,7 +46,7 @@ export default function PolarChart({ bssidArray, power }) {
         },
       },
       tooltip: {
-        enabled: true,
+        enabled: false,
       },
       plotOptions: {
         series: {
@@ -50,11 +60,9 @@ export default function PolarChart({ bssidArray, power }) {
               const pointIndex = this.point.index;
 
               // Get the corresponding ID and data value from the arrays
-              const id = bssidArray[pointIndex];
-              const value = filteredPower[pointIndex];
+              const id = idArray[pointIndex];
+              const value = pointsArray[pointIndex];
 
-              const localBssidArray = bssidArray;
-              const localPower = filteredPower;
               // Customize the label using the ID and value
               return `ID: ${id}, Value: ${value}`;
             },
@@ -72,18 +80,18 @@ export default function PolarChart({ bssidArray, power }) {
         {
           type: "area",
           name: "Power",
-          data: filteredPower,
+          data: pointsArray,
         },
       ],
     };
 
     Highcharts.chart("polar", chartOptions);
   }, []);
-    
+
   return (
     <div
       id="polar"
-      className="flex justify-center items-center max-h-[100%] max-w-[100%] border rounded-lg bg-[#0F4C75] bg-opacity-20"
+      className="flex justify-center items-center h-[80%] w-[100%] border rounded-lg bg-[#0F4C75] bg-opacity-20"
     >
       <HighchartsReact highcharts={Highcharts} options={{}} />
     </div>

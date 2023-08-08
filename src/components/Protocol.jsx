@@ -10,10 +10,14 @@ const Prototype = () => {
   const [csvData, setCsvData] = useAtom(csvAtom);
   const [selected , setSelected] = useAtom(selectedCompAtom)
 
-  console.log("selected", selected[selected.length - 1][0])
+  const sel = selected[selected.length-1][0];
+  console.log(sel)
+  const selectedCsvObject = csvData.first_section.find(
+    (item) => item.BSSID === sel
+  );
   
-  console.log(csvData.first_section[0].BSSID);
-  console.log(csvData.first_section[0].ESSID);
+  // console.log(csvData.first_section[0].BSSID);
+  // console.log(csvData.first_section[0].ESSID);
   return (
     <div className="flex gap-10 w-full max-h-full  justify-center items-center ">
       <img
@@ -24,13 +28,13 @@ const Prototype = () => {
       <div className="w-[40%] border bg-[#03051E] h-[80vh]  bg-opacity-30 pl-5 pt-3 text-white rounded-lg mt-20 ">
         <div className="text-2xl text-white uppercase"> Analyze!</div>
 
-        {csvData.first_section.length > 0 && (
+        {selectedCsvObject && (
           <div className="flex flex-col gap-3 p-3">
-            {Object.keys(csvData.first_section[0]).map((key, index) => (
-              <div key={index} className=" rounded-lg text-white">
+            {Object.entries(selectedCsvObject).map(([key, value], index) => (
+              <div key={index} className="rounded-lg text-white">
                 <p>
                   <span className="font-bold">{key}: </span>
-                  {csvData.first_section[0][key]}
+                  {value}
                 </p>
               </div>
             ))}

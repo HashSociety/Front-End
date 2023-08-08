@@ -69,15 +69,15 @@ const Map = () => {
 
       const lastElements = [];
 
-      if (data.compenents && typeof data.compenents === "object") {
-        for (const key in data.compenents) {
-          const components = data.compenents[key];
-          const lastComponent = components[components.length - 1];
-          if (lastComponent) {
-            lastElements.push(lastComponent);
-          }
-        }
-      }
+      // if (data.compenents && typeof data.compenents === "object") {
+      //   for (const key in data.compenents) {
+      //     const components = data.compenents[key];
+      //     const lastComponent = components[components.length - 1];
+      //     if (lastComponent) {
+      //       lastElements.push(lastComponent);
+      //     }
+      //   }
+      // }
 
       console.log("Array of arrays:", lastElements);
 
@@ -125,6 +125,7 @@ const Map = () => {
  }, [])
 
 
+ 
   if (
     csvData &&
     csvData.first_section &&
@@ -163,7 +164,7 @@ const Map = () => {
             />
           </div>
           <div className="max-w-[100%] mt-10">
-             <PolarGraph bssidArray={bssidArray} power={power}/>
+             <PolarGraph/>
           </div>
           </div>
           <div className="mt-10 flex-row flex-wrap flex gap-4">
