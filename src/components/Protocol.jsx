@@ -10,10 +10,17 @@ const Prototype = () => {
   const [csvData, setCsvData] = useAtom(csvAtom);
   const [selected , setSelected] = useAtom(selectedCompAtom)
 
-  console.log("selected", selected[selected.length - 1][0])
+  console.log("selected", selected[selected.length - 1][0]);
+  console.log("csvData", csvData);
   
   console.log(csvData.first_section[0].BSSID);
-  console.log(csvData.first_section[0].ESSID);
+
+  const protocolData = []
+ 
+  if(csvData){
+    csvData.first_section.map((data) => protocolData.push(data))
+  }
+  console.log(protocolData.find((data) => data.BSSID === selected[selected.length - 1][0]))
   return (
     <div className="flex gap-10 w-full max-h-full  justify-center items-center ">
       <img
