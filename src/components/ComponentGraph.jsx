@@ -195,7 +195,7 @@ console.log(pcap)
       style={{
         height: graphHeight,
         width: graphWidth,
-        backgroundColor: pcap.mesh ? "rgb(74, 222, 128, 0.1)" : "",
+        // backgroundColor: pcap.mesh ? "rgb(74, 222, 128, 0.1)" : "",
         
         // borderRadius:"1rem"
       }}

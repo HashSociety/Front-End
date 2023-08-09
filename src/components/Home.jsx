@@ -17,8 +17,7 @@ function Home({ user }) {
   const navigate = useNavigate();
   const scanMutation = useMutation(scanNetwork, {
     onSuccess: async () => {
-  
-      await new Promise(r => setTimeout(r,(selectedValue + 5)*1000 ));
+      await new Promise((r) => setTimeout(r, (selectedValue + 5) * 1000));
       navigate("/map");
     },
   });
@@ -51,8 +50,8 @@ function Home({ user }) {
         {/* <button onClick={() => scanNetwork(8)}>scan</button> */}
 
         <div className="ml-[10%]  bg-black w-fit">
-          Mesh Hawk is one tap solution which detects concealed mesh networks{" "}
-          <br /> - reshaping cyber security htmlFor the better!!
+          Mesh Hawk is one tap solution which detects concealed mesh networks
+          <br />- reshaping cyber security for the better!!
           {user && (
             <div className="flex flex-col absolute bg-black rounded-lg ">
               <div className="flex gap-5 ml-5 mt-7 w-fit pl-2 pr-2 py-2 bg-[#2D2D2D] rounded">
@@ -104,7 +103,7 @@ function Home({ user }) {
                       className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-purple-500 border-[1px] ${
                         selectedValue === 30
                           ? "text-white bg-purple-700 "
-                          : "  bg-purple-500/20 text-purple-700   hover:bg-purple-700 hover:text-white"
+                          : "  bg-purple-500/20 text-purple-700   hover:bg-purple-700 hover:text-white font-"
                       }`}
                       onClick={() => setSelectedValue(30)}
                     >
@@ -182,19 +181,55 @@ function Home({ user }) {
             className=" bg-black  mt-20 w-full rounded-2xl object-cover h-[90%]"
           />
         </div>
-        <div className="mt-10">
-          asdad Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Corporis unde suscipit, quam quisquam vel illo minus facilis est
-          magnam laboriosam voluptatum, voluptatibus, harum nemo veritatis quasi
-          placeat et hic culpa asperiores officia neque deserunt. Blanditiis ea
-          impedit, sequi maxime dolorem magnam! Aliquid ratione nesciunt at
-          deleniti quidem adipisci ullam nihil, qui, expedita non totam nemo
-          distinctio neque inventore, officia dolores itaque impedit ad veniam
-          id! Adipisci quidem tenetur sint molestiae ipsum error, eligendi esse
-          assumenda rem nesciunt modi eveniet reiciendis quam dolorum expedita,
-          saepe itaque, molestias ad consectetur omnis magni quo laborum. Quam
-          quisquam quis alias nesciunt tenetur veritatis excepturi.
+        
+        <div className="flex items-center  mt-36">
+          <div class="w-[197px] h-[53px] px-8 py-4 bg-white bg-opacity-10 rounded justify-center items-center gap-2.5 inline-flex ">
+            <div class="text-white text-xl font-normal uppercase leading-tight">
+              About Us
+            </div>
+          </div>
         </div>
+        <div className=" text-7xl inline flex-col uppercase mt-3">
+            What is
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-900  to-blue-700 ">
+              MeshHawk?
+            </span>
+        </div>
+        <div className="w-[70%] text-xl opacity-70">
+            We're sincerely grateful that you've made MeshHawk your choice for enhancing your services. To ensure that your experience is as smooth as possible, we've taken the time to simplify every step of the process – from the initial scan to the final analysis. Rest assured, we're here to make this journey user-friendly for everyone involved.
+            <br /><br />
+            For an in-depth understanding of how to harness the full capabilities of MeshHawk, we encourage you to dive into our dedicated document. There, you'll uncover a wealth of valuable insights and practical tips that will empower you to fully unleash MeshHawk's potential. The document serves as your go-to resource for navigating this innovative tool with confidence.
+        </div>
+
+       
+          <div className="flex items-center mt-16 ">
+            <div class="w-[197px] h-[53px] px-8 py-4 bg-white bg-opacity-10 rounded justify-center items-center gap-2.5 inline-flex ">
+              <div class="text-white text-xl font-normal uppercase leading-tight">
+                How to use
+              </div>
+            </div>
+          </div>
+          <div className=" text-7xl inline flex-col uppercase mt-3">
+            go-to Steps to
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-900  to-blue-700 ">
+              follow
+            </span>
+          </div>
+          <div className="w-[70%] text-xl opacity-70">
+            We are grateful you decided to use MeshHawk for your services. To
+            make the experience seem less we have simplified every step, from
+            scanning to analysis, ensuring a smooth experience for everyone.
+            Dive into our dedicated document to uncover valuable insights and
+            handy tips, helping you unleash the full potential of MeshHawk.
+            <br />
+            <br />
+            Here is a stepwise guide to help you use MeshHawk - you can use the
+            document or refer to the flow below.
+          </div>
+        
+
         {/* <div className="flex flex-row gap-4">
             {user ? (
               <button
