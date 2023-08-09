@@ -43,8 +43,12 @@ const App = () => {
   
 
   useEffect(() => {
-    getUserId.mutate()
-  },[])
+    console.log("useEffect") 
+    if(!userId){
+      
+      getUserId.mutate()
+    }         
+  },[]) 
 
 
   return (
