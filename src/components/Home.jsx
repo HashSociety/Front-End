@@ -18,7 +18,7 @@ function Home({ user }) {
   const scanMutation = useMutation(scanNetwork, {
     onSuccess: async () => {
   
-      await new Promise(r => setTimeout(r,(selectedValue + 15)*1000 ));
+      await new Promise(r => setTimeout(r,(selectedValue + 5)*1000 ));
       navigate("/map");
     },
   });

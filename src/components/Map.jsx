@@ -92,7 +92,7 @@ const Map = () => {
         type: pcapHeaders.get("content-type"),
       });
 
-      const pcapFile = new File([pcapBlob], pcapHeaders.get('last-modified'), {
+      const pcapFile = new File([pcapBlob], `${pcapHeaders.get('last-modified')}`, {
         lastModified: new Date(pcapHeaders.get('last-modified')).getTime(),
         type: pcapHeaders.get('content-type'),
       });
@@ -106,9 +106,9 @@ const Map = () => {
         const responseBuffer = await data.arrayBuffer();
         const pcapBlob = new Blob([responseBuffer], { type: pcapHeaders.get('content-type') });
         
-        const csvFile = new File([pcapBlob], pcapHeaders.get('last-modified') , {
+        const csvFile = new File([pcapBlob], `${pcapHeaders.get('last-modified')}.csv` , {
           lastModified: new Date(pcapHeaders.get('last-modified')).getTime(),
-          type: "text/csv; charset=utf-8",
+          type: "text/csv",
         });
         setCsvFile(csvFile);
       }
@@ -134,7 +134,7 @@ const Map = () => {
       }
     });
   }
-
+  console.log(csvFile)
   return (
     <div className="h-screen over">
       {responseMessage ? (
