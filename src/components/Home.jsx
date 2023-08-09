@@ -8,6 +8,7 @@ import { scanNetwork } from "../api";
 import { useMutation } from "@tanstack/react-query";
 import Loading from "./Loading";
 import { toast } from "react-toastify";
+import { BsArrowUpRight } from "react-icons/bs";
 
 function Home({ user }) {
   const [mapData, setMapData] = useAtom(mapAtom);
@@ -94,7 +95,7 @@ function Home({ user }) {
                           htmlFor="radio-15s"
                           className=" px-10 cursor-pointer"
                         >
-                          Quick
+                          15s
                         </label>
                       </div>
                     </li>
@@ -120,7 +121,7 @@ function Home({ user }) {
                           htmlFor="radio-30s"
                           className=" px-10  cursor-pointer  "
                         >
-                          Intermediate
+                          30s
                         </label>
                       </div>
                     </li>
@@ -145,7 +146,7 @@ function Home({ user }) {
                           htmlFor="radio-60s"
                           className=" px-10 cursor-pointer"
                         >
-                          Advanced
+                          45s
                         </label>
                       </div>
                     </li>
@@ -181,7 +182,7 @@ function Home({ user }) {
             className=" bg-black  mt-20 w-full rounded-2xl object-cover h-[90%]"
           />
         </div>
-        
+
         <div className="flex items-center  mt-36">
           <div class="w-[197px] h-[53px] px-8 py-4 bg-white bg-opacity-10 rounded justify-center items-center gap-2.5 inline-flex ">
             <div class="text-white text-xl font-normal uppercase leading-tight">
@@ -190,46 +191,73 @@ function Home({ user }) {
           </div>
         </div>
         <div className=" text-7xl inline flex-col uppercase mt-3">
-            What is
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-900  to-blue-700 ">
-              MeshHawk?
-            </span>
+          What is
+          <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-900  to-blue-700 ">
+            MeshHawk?
+          </span>
         </div>
         <div className="w-[70%] text-xl opacity-70">
-            We're sincerely grateful that you've made MeshHawk your choice for enhancing your services. To ensure that your experience is as smooth as possible, we've taken the time to simplify every step of the process – from the initial scan to the final analysis. Rest assured, we're here to make this journey user-friendly for everyone involved.
-            <br /><br />
-            For an in-depth understanding of how to harness the full capabilities of MeshHawk, we encourage you to dive into our dedicated document. There, you'll uncover a wealth of valuable insights and practical tips that will empower you to fully unleash MeshHawk's potential. The document serves as your go-to resource for navigating this innovative tool with confidence.
+          We're sincerely grateful that you've made MeshHawk your choice for
+          enhancing your services. To ensure that your experience is as smooth
+          as possible, we've taken the time to simplify every step of the
+          process – from the initial scan to the final analysis. Rest assured,
+          we're here to make this journey user-friendly for everyone involved.
+          <br />
+          <br />
+          For an in-depth understanding of how to harness the full capabilities
+          of MeshHawk, we encourage you to dive into our dedicated document.
+          There, you'll uncover a wealth of valuable insights and practical tips
+          that will empower you to fully unleash MeshHawk's potential. The
+          document serves as your go-to resource for navigating this innovative
+          tool with confidence.
         </div>
 
-       
-          <div className="flex items-center mt-16 ">
-            <div class="w-[197px] h-[53px] px-8 py-4 bg-white bg-opacity-10 rounded justify-center items-center gap-2.5 inline-flex ">
-              <div class="text-white text-xl font-normal uppercase leading-tight">
-                How to use
-              </div>
+        <div className="flex items-center mt-16 ">
+          <div class="w-[197px] h-[53px] px-8 py-4 bg-white bg-opacity-10 rounded justify-center items-center gap-2.5 inline-flex ">
+            <div class="text-white text-xl font-normal uppercase leading-tight">
+              How to use
             </div>
           </div>
-          <div className=" text-7xl inline flex-col uppercase mt-3">
-            go-to Steps to
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-900  to-blue-700 ">
-              follow
-            </span>
+        </div>
+        <div className=" text-7xl inline flex-col uppercase mt-3">
+          go-to Steps to
+          <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-900  to-blue-700 ">
+            follow
+          </span>
+        </div>
+        <div className="w-[70%] text-xl opacity-70">
+          We are grateful you decided to use MeshHawk for your services. To make
+          the experience seem less we have simplified every step, from scanning
+          to analysis, ensuring a smooth experience for everyone. Dive into our
+          dedicated document to uncover valuable insights and handy tips,
+          helping you unleash the full potential of MeshHawk.
+          <br />
+          <br />
+          Here is a stepwise guide to help you use MeshHawk - you can use the
+          document or refer to the flow below.
+        </div>
+        <div className="w-full flex justify-center items-center mt-44 relative mb-32">
+          <div className="w-[60%] text-6xl text-center">
+            GET to know more about us. our lazy team. and our amazing mentor
           </div>
-          <div className="w-[70%] text-xl opacity-70">
-            We are grateful you decided to use MeshHawk for your services. To
-            make the experience seem less we have simplified every step, from
-            scanning to analysis, ensuring a smooth experience for everyone.
-            Dive into our dedicated document to uncover valuable insights and
-            handy tips, helping you unleash the full potential of MeshHawk.
-            <br />
-            <br />
-            Here is a stepwise guide to help you use MeshHawk - you can use the
-            document or refer to the flow below.
+          <div className="absolute bottom-[-70px] bg-secondary/90 flex justify-center items-center aspect-square w-20 rounded-full  left-50  text-4xl">
+            <BsArrowUpRight />
           </div>
-        
+        </div>
 
+        <div className="flex justify-center  w-full mt-20">
+          <Link
+            to="/"
+            className="text-xl font-bold flex items-center logo translate-x-5  "
+          >
+            <img src="./kavach.png  " alt="" className="w-[15%]" />
+            MeshHawk
+          </Link>
+        </div>
+        <div className="w-3/4 border-t-[1px] mx-auto"></div>
+        <div className="flex  items-center justify-center py-8 ">Made with love by &nbsp;<span className="font-bold text"> Hash Society &nbsp;💛 </span> </div>
         {/* <div className="flex flex-row gap-4">
             {user ? (
               <button
