@@ -16,6 +16,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PolarGraph from "./components/PolarGraph";
 import { useAtom } from "jotai";
+import Report from "./components/Report";
 
 const App = () => {
   const [shouldHideNavbar, setShouldHideNavbar] = useState(false);
@@ -86,6 +87,7 @@ const App = () => {
 
         <Route path="/logs" element={<Logs />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/report" element={<Report/>}/>
         {/* <Route path="/polar" element={<PolarGraph/> }/> */}
       </Routes>
     

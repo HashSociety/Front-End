@@ -125,3 +125,18 @@ export const getScannedCsv = async () => {
     
   }
 } 
+
+export const updateFireBase = async () => {
+  try {
+    const response = await fetch(import.meta.env.VITE_BACKEND_URL + `/update_database/?userid="sanskardwivedi003@gmail.com`, {
+    method: 'POST',
+
+  });
+  const result = await response.json();
+
+  return result; 
+} catch (error) {
+  console.error('Error:', error);
+  throw error;
+}
+}

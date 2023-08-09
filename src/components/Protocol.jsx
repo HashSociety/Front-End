@@ -7,12 +7,13 @@ import { useAtom } from "jotai";
 import { PiDotsNineDuotone } from "react-icons/pi";
 import { MdSocialDistance } from "react-icons/md";
 import ComponentGraph from "./ComponentGraph";
+import { Link, useNavigate } from "react-router-dom";
 
 const Prototype = () => {
   const [mapData, setMapData] = useAtom(mapAtom);
   const [csvData, setCsvData] = useAtom(csvAtom);
   const [selected, setSelected] = useAtom(selectedCompAtom);
-
+  const navigate = useNavigate();
   console.log("selected", selected);
   // console.log("csvData", csvData);
 
@@ -87,20 +88,37 @@ const Prototype = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col bg-secondary/10 rounded-2xl px-5 w-fit">
+        <div className="flex flex-col  gap-1  bg-secondary/10 rounded-2xl px-5 w-full">
           <h3 className="text-2xl">Vendor Details</h3>
+          <div className="flex flex-wrap w-full">
           {Object.entries(selected.mac_address).map(
-            ([key, value], innerIndex) => (
-              <div key={innerIndex} className="flex gap-10">
+            ([key, value], innerIndex) => ( 
+              <div key={innerIndex} className="">
                 {value !== null && (
                   <>
-                    <p>MAC Address: <b>{key}</b></p>
-                    <p>Vendor: <b>{value}</b></p>
+                    <p>
+                      MAC Address: <b>{key}</b>
+                    </p>
+                    
                   </>
                 )}
               </div>
             )
           )}
+          </div>
+          
+        </div>
+        <div>
+        <div className="flex">
+            <button
+              className=" uppercase px-4 py-2 rounded-xl text-white bg-[#0F4C75] border border-gray-500 bg-opacity-20 rounded-b-2xl"
+              onClick={() => {
+                navigate("/report");
+              }}
+            >
+              Report
+            </button>
+          </div>
         </div>
       </div>
 
