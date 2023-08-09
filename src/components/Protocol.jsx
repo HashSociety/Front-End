@@ -25,6 +25,7 @@ const Prototype = () => {
   // console.log("data", selected.component_edges)
 
   const dataArray = Object.values(csvData.first_section);
+  console.log(selected.mac_address)
   // console.log(dataArray);
 
   // const selectedObject = dataArray.find((data) => data.BSSID === selectedBSSID);
@@ -89,15 +90,15 @@ const Prototype = () => {
           </div>
         </div>
         <div className="flex flex-col  gap-1  bg-secondary/10 rounded-2xl px-5 w-full">
-          <h3 className="text-2xl">Vendor Details</h3>
-          <div className="flex flex-wrap w-full">
+          <h3 className="text-2xl">Mac Address</h3>
+          <div className="flex flex-wrap gap-3 w-full">
           {Object.entries(selected.mac_address).map(
             ([key, value], innerIndex) => ( 
               <div key={innerIndex} className="">
                 {value !== null && (
                   <>
                     <p>
-                      MAC Address: <b>{key}</b>
+                      MAC Address: <b>{value}</b>
                     </p>
                     
                   </>
@@ -109,16 +110,16 @@ const Prototype = () => {
           
         </div>
         <div>
-        <div className="flex">
+    
             <button
-              className=" uppercase px-4 py-2 rounded-xl text-white bg-[#0F4C75] border border-gray-500 bg-opacity-20 rounded-b-2xl"
+              className=" fixed bottom-10  uppercase px-8 py-4  rounded-xl text-white bg-[#0F4C75] border border-gray-500  rounded-b-2xl"
               onClick={() => {
                 navigate("/report");
               }}
             >
               Report
             </button>
-          </div>
+     
         </div>
       </div>
 

@@ -12,6 +12,10 @@ const Report = () => {
       selected.component_edges.length - 1
     ][0].toUpperCase();
   console.log("selected", selected);
+
+  const handlePrint = () => {
+    window.print();
+  };
   return (
     <div className=" w-full h-screen aspect-[9/16] ">
       <div className=" flex justify-center text-4xl">Report</div>
@@ -27,18 +31,19 @@ const Report = () => {
           </div>
           <div className="flex flex-col w-full">
             <div className="text-3xl my-3">Mac Addresses of Graph</div>
-            <div className="flex flex-row flex-wrap gap-5 rounded-2xl px-3 w-full mt-5">
+            <div className="flex flex-row flex-wrap gap-8 rounded-2xl px-3 w-full mt-5">
               {Object.entries(selected.mac_address).map(
-                ([key, value], innerIndex) =>
-                  // Check if value is not null before creating the <div>
-                  value !== null && (
-                    <div
-                      key={innerIndex}
-                      className="flex gap-10 bg-white/20 px-10 py-2 rounded-xl"
-                    >
-                      <b>{key}</b>
-                    </div>
-                  )
+                ([key, value], innerIndex) => (
+                  <div key={innerIndex} className="">
+                    {value !== null && (
+                      <>
+                        <p>
+                          <b className="bg-white/10 p-4 rounded-xl">{value}</b>
+                        </p>
+                      </>
+                    )}
+                  </div>
+                )
               )}
             </div>
           </div>
@@ -113,6 +118,14 @@ const Report = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="mt-10 flex justify-center ">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={handlePrint}
+        >
+          Save as PDF
+        </button>
       </div>
     </div>
   );
