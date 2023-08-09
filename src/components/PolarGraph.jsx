@@ -92,7 +92,7 @@ export default function PolarChart({}) {
   return (
     <div
       id="polar"
-      className="flex justify-center items-center h-[80%] w-[90%] border rounded-lg bg-[#0F4C75] bg-opacity-20"
+      className="flex justify-center items-center max-h-[100%] max-w-[90%] border rounded-lg bg-[#0F4C75] bg-opacity-20"
     >
       <HighchartsReact highcharts={Highcharts} options={{}} />
     </div>
