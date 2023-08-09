@@ -14,12 +14,18 @@ function Home({ user }) {
   const [mapData, setMapData] = useAtom(mapAtom);
   const [showTest, setShowTest] = useState(false);
   const [selectedValue, setSelectedValue] = useState(null);
+  const [customValue, setCustomValue] = useState(null);
 
   const navigate = useNavigate();
   const scanMutation = useMutation(scanNetwork, {
     onSuccess: async () => {
-      await new Promise((r) => setTimeout(r, (selectedValue + 5) * 1000));
-      navigate("/map");
+      if (customValue) {
+        await new Promise((r) => setTimeout(r, (customValue + 5) * 1000));
+        navigate("/map");
+      } else {
+        await new Promise((r) => setTimeout(r, (selectedValue + 5) * 1000));
+        navigate("/map");
+      }
     },
   });
 
@@ -28,8 +34,12 @@ function Home({ user }) {
   };
 
   const handleScan = () => {
-    if (!selectedValue) {
+    if (!selectedValue && !customValue) {
       toast.error("please select duration");
+      return;
+    }
+    if (customValue) {
+      scanMutation.mutate(customValue);
       return;
     }
     scanMutation.mutate(selectedValue);
@@ -70,106 +80,142 @@ function Home({ user }) {
                     showTest ? "" : "hidden"
                   }`}
                 >
-                  <div className="mt-4">
-                    Select your desired time of scan --
+                  <div className="mt-4 font-bold text-gray-400 mb-3">
+                    Scan ( in seconds -){" "}
                   </div>
-                  <ul className="items-center  w-full text-sm font-medium rounded sm:flex text-white mt-1 gap-2">
-                    <li
-                      className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-blue-500 border-[1px] ${
-                        selectedValue === 15
-                          ? "text-white bg-blue-700 "
-                          : "  bg-blue-500/20 text-blue-700   hover:bg-blue-700 hover:text-white"
-                      }`}
-                      onClick={() => setSelectedValue(15)}
-                    >
-                      <div className="flex items-center cursor-pointer">
-                        <input
-                          id="radio-15s"
-                          type="radio"
-                          value={15}
-                          name="list-radio"
-                          className="w-4 h-4 hidden "
-                          // onChange={handleRadioChange}
-                        />
-                        <label
-                          htmlFor="radio-15s"
-                          className=" px-10 cursor-pointer"
-                        >
-                          15s
-                        </label>
-                      </div>
-                    </li>
-
-                    <li
-                      className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-purple-500 border-[1px] ${
-                        selectedValue === 30
-                          ? "text-white bg-purple-700 "
-                          : "  bg-purple-500/20 text-purple-700   hover:bg-purple-700 hover:text-white font-"
-                      }`}
-                      onClick={() => setSelectedValue(30)}
-                    >
-                      <div className="flex items-center cursor-pointer">
-                        <input
-                          id="radio-30s"
-                          type="radio"
-                          value={30}
-                          name="list-radio"
-                          className="w-4 h-4 hidden"
-                          // onChange={handleRadioChange}
-                        />
-                        <label
-                          htmlFor="radio-30s"
-                          className=" px-10  cursor-pointer  "
-                        >
-                          30s
-                        </label>
-                      </div>
-                    </li>
-
-                    <li
-                      className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-teal-500 border-[1px] ${
-                        selectedValue === 45
-                          ? "text-white bg-teal-700 "
-                          : "  bg-teal-500/20 text-blue-700-600   hover:bg-teal-800 hover:text-white"
-                      }`}
-                      onChange={() => setSelectedValue(45)}
-                    >
-                      <div className="flex items-center cursor-pointer">
-                        <input
-                          id="radio-60s"
-                          type="radio"
-                          value={45}
-                          name="list-radio"
-                          className="w-4 h-4 hidden"
-                        />
-                        <label
-                          htmlFor="radio-60s"
-                          className=" px-10 cursor-pointer"
-                        >
-                          45s
-                        </label>
-                      </div>
-                    </li>
-
-                    <li
-                      className={`w-full border-b sm:border-b-0 py-3  px- ${
-                        selectedValue === "scan" ? "selected" : ""
-                      }`}
-                    >
-                      <div className="flex items-center ">
-                        {scanMutation.isLoading ? (
-                          <Loading />
-                        ) : (
-                          <button
-                            className="py-2 px-6 bg-secondary rounded  font-bold  "
-                            onClick={handleScan}
+                  {customValue === null ? (
+                    <ul className="items-center  w-full text-sm font-medium rounded sm:flex text-white mt-1 gap-2">
+                      <li
+                        className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-blue-500 border-[1px] ${
+                          selectedValue === 15
+                            ? "text-white bg-blue-700 "
+                            : "  bg-blue-500/20 text-blue-700   hover:bg-blue-700 hover:text-white"
+                        }`}
+                        onClick={() => setSelectedValue(15)}
+                      >
+                        <div className="flex items-center cursor-pointer">
+                          <input
+                            id="radio-15s"
+                            type="radio"
+                            value={15}
+                            name="list-radio"
+                            className="w-4 h-4 hidden "
+                          />
+                          <label
+                            htmlFor="radio-15s"
+                            className=" px-10 cursor-pointer"
                           >
-                            Scan
-                          </button>
-                        )}
-                      </div>
-                    </li>
-                  </ul>
+                            15s
+                          </label>
+                        </div>
+                      </li>
+
+                      <li
+                        className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-purple-500 border-[1px] ${
+                          selectedValue === 30
+                            ? "text-white bg-purple-700 "
+                            : "  bg-purple-500/20 text-purple-700   hover:bg-purple-700 hover:text-white font-"
+                        }`}
+                        onClick={() => setSelectedValue(30)}
+                      >
+                        <div className="flex items-center cursor-pointer">
+                          <input
+                            id="radio-30s"
+                            type="radio"
+                            value={30}
+                            name="list-radio"
+                            className="w-4 h-4 hidden"
+                            // onChange={handleRadioChange}
+                          />
+                          <label
+                            htmlFor="radio-30s"
+                            className=" px-10  cursor-pointer  "
+                          >
+                            30s
+                          </label>
+                        </div>
+                      </li>
+
+                      <li
+                        className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-teal-500 border-[1px] ${
+                          selectedValue === 45
+                            ? "text-white bg-teal-700 "
+                            : "  bg-teal-500/20 text-blue-700-600   hover:bg-teal-800 hover:text-white"
+                        }`}
+                        onChange={() => setSelectedValue(45)}
+                      >
+                        <div className="flex items-center cursor-pointer">
+                          <input
+                            id="radio-60s"
+                            type="radio"
+                            value={45}
+                            name="list-radio"
+                            className="w-4 h-4 hidden"
+                          />
+                          <label
+                            htmlFor="radio-60s"
+                            className=" px-10 cursor-pointer"
+                          >
+                            45s
+                          </label>
+                        </div>
+                      </li>
+                      <li
+                        className={`w-full    transition-all duration-75 ease-in-out rounded-lg   py-2 font-bold border-gray-500 border-[1px] ${
+                          selectedValue === 45
+                            ? "text-white bg-gray-700 "
+                            : "  bg-gray-500/20 text-gray-700-600   hover:bg-gray-800 hover:text-white"
+                        }`}
+                      >
+                        <button
+                          className="flex items-center cursor-pointer px-10"
+                          onClick={() => {
+                            setCustomValue(15);
+                          }}
+                        >
+                          Custom
+                        </button>
+                      </li>
+
+                      <li
+                        className={`w-full border-b sm:border-b-0 py-3  px- ${
+                          selectedValue === "scan" ? "selected" : ""
+                        }`}
+                      ></li>
+                    </ul>
+                  ) : (
+                    <div className="flex justify-center gap-3 ">
+                      <input
+                        type="number"
+                        className={`w-full  px-5  transition-all duration-75 ease-in-out rounded-lg   py-2 font-bold border-gray-500 border-[1px] 
+                          bg-gray-500/20 text-gray-700-600   hover:bg-gray-800 hover:text-white appearance-none
+                    }`}
+                        value={customValue}
+                        onChange={(e) => setCustomValue(parseInt(e.target.value))}
+                      />
+                      <button
+                        onClick={() => {
+                          setCustomValue(null);
+                          setSelectedValue(15);
+                        }}
+                        className="flex justify-center items-center text-3xl rotate-45 text-gray-400 hover:text-white "
+                      >
+                        +
+                      </button>
+                    </div>
+                  )}
+                  <div className="flex items-center mt-4">
+                    {scanMutation.isLoading ? (
+                      <Loading />
+                    ) : (
+                      <button
+                        className="py-2  bg-secondary rounded-xl  font-bold px-40  w-full "
+                        onClick={handleScan}
+                      >
+                        Scan
+                      </button>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
@@ -257,7 +303,10 @@ function Home({ user }) {
           </Link>
         </div>
         <div className="w-3/4 border-t-[1px] mx-auto"></div>
-        <div className="flex  items-center justify-center py-8 ">Made with love by &nbsp;<span className="font-bold text"> Hash Society &nbsp;💛 </span> </div>
+        <div className="flex  items-center justify-center py-8 ">
+          Made with love by &nbsp;
+          <span className="font-bold text"> Hash Society &nbsp;💛 </span>{" "}
+        </div>
         {/* <div className="flex flex-row gap-4">
             {user ? (
               <button
