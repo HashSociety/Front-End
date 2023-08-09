@@ -13,7 +13,7 @@ const Prototype = () => {
   const [csvData, setCsvData] = useAtom(csvAtom);
   const [selected, setSelected] = useAtom(selectedCompAtom);
 
-  // console.log("selected", selected[selected.length - 1][0]);
+  console.log("selected", selected);
   // console.log("csvData", csvData);
 
   const selectedBSSID =
@@ -47,7 +47,7 @@ const Prototype = () => {
                     if (!["BSSID", "ESSID"].includes(key)) {
                       return (
                         <p key={key}>
-                          {key}: <span className="font-bold">{value}</span> 
+                          {key}: <span className="font-bold">{value}</span>
                         </p>
                       );
                     }
@@ -63,7 +63,7 @@ const Prototype = () => {
       </div>
 
       <div className="flex flex-col w-[50%] h-[75vh] gap-3 ">
-        <div className="min-h-[60%] w-full bg-secondary/10 rounded-2xl">
+        <div className="min-h-[65%] w-full bg-secondary/10 rounded-2xl">
           {" "}
           <ComponentGraph pcap={selected} />{" "}
         </div>
@@ -87,13 +87,28 @@ const Prototype = () => {
             </div>
           </div>
         </div>
+        <div className="flex flex-col bg-secondary/10 rounded-2xl px-5 w-fit">
+          <h3 className="text-2xl">Vendor Details</h3>
+          {Object.entries(selected.mac_address).map(
+            ([key, value], innerIndex) => (
+              <div key={innerIndex} className="flex gap-10">
+                {value !== null && (
+                  <>
+                    <p>MAC Address: <b>{key}</b></p>
+                    <p>Vendor: <b>{value}</b></p>
+                  </>
+                )}
+              </div>
+            )
+          )}
+        </div>
       </div>
 
       {/* <div className="flex  text-white fixed bottom-0 justify-center  p-1 rounded-xl text-3xl font-extrabold mb-4 shadow-2xl">
         <button className="  bg-red-700 hover:bg-red-600  rounded-s-xl py-1  px-4 font-normal flex items-center gap-2 justify-center ">
           Attack
           <GiOverkill />
-        </button>
+        </button>...
         <button className=" bg-gray-700 hover:bg-gray-600  rounded-e-xl py-1  px-4 font-normal flex items-center gap-2">
           Download
           <BiDownload />
