@@ -119,7 +119,6 @@ const Map = () => {
     getPcapMutation.mutate();
     getCvsMutation.mutate();
   }, []);
-
   if (
     csvData &&
     csvData.first_section &&
@@ -158,7 +157,7 @@ const Map = () => {
           </div>
           <div className="mt-10 flex-row flex-wrap justify-center flex gap-4">
             {secresponseMessage.map((result, index) => (
-              <div key={index} className="relative ">
+              <div key={index} className={`relative rounded-xl`}>
                 <ComponentGraph
                   keyVar={`component${index}`}
                   pcap={result}
