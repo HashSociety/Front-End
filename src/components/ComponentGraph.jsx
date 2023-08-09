@@ -20,7 +20,7 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,cla
   const nodes = []; 
   
 
-  console.log(nodes)
+console.log(pcap)
   // Update the logic for creating nodes from the pcap array of size 4
   for (const key in pcap) {
     if(key == "component_edges"){
@@ -195,7 +195,8 @@ export default function GenerateGraph({pcap, keyVar, graphHeight, graphWidth,cla
       style={{
         height: graphHeight,
         width: graphWidth,
-        // backgroundColor: 'white',
+        backgroundColor: pcap.mesh ? "rgb(74, 222, 128, 0.1)" : "",
+        
         // borderRadius:"1rem"
       }}
       className={`${className}`}
