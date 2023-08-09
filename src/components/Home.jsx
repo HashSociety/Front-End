@@ -22,9 +22,6 @@ function Home({ user }) {
       navigate("/map");
     },
   });
-  async function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
 
   const scan = () => {
     setShowTest((prevShowTest) => !prevShowTest);
@@ -80,8 +77,8 @@ function Home({ user }) {
                     <li
                       className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-blue-500 border-[1px] ${
                         selectedValue === 15
-                          ? "text-white bg-blue-500 "
-                          : "  bg-blue-500/20 text-blue-600   hover:bg-blue-500 hover:text-white"
+                          ? "text-white bg-blue-700 "
+                          : "  bg-blue-500/20 text-blue-700   hover:bg-blue-700 hover:text-white"
                       }`}
                       onClick={() => setSelectedValue(15)}
                     >
@@ -106,8 +103,8 @@ function Home({ user }) {
                     <li
                       className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-purple-500 border-[1px] ${
                         selectedValue === 30
-                          ? "text-white bg-purple-500 "
-                          : "  bg-purple-500/20 text-purple-600   hover:bg-purple-500 hover:text-white"
+                          ? "text-white bg-purple-700 "
+                          : "  bg-purple-500/20 text-purple-700   hover:bg-purple-700 hover:text-white"
                       }`}
                       onClick={() => setSelectedValue(30)}
                     >
@@ -132,8 +129,8 @@ function Home({ user }) {
                     <li
                       className={`w-full    transition-all duration-75 ease-in-out rounded-lg  px-3 py-2 font-bold border-teal-500 border-[1px] ${
                         selectedValue === 45
-                          ? "text-white bg-teal-500 "
-                          : "  bg-teal-500/20 text-teal-600   hover:bg-teal-500 hover:text-white"
+                          ? "text-white bg-teal-700 "
+                          : "  bg-teal-500/20 text-blue-700-600   hover:bg-teal-800 hover:text-white"
                       }`}
                       onChange={() => setSelectedValue(45)}
                     >
